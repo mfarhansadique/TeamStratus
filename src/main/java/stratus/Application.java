@@ -15,8 +15,11 @@ public class Application {
         RouteDAO routeDao = ctx2.getBean(RouteDAO.class);
 
         User dom = new User("Dominika", "Malinowska", "246 Priory Road", "Birmingham", "B28 0SU", "dom", "password", "do_ma1991@hotmail.com", "07904295900", 'A', null );
-        userDao.save(dom);
+//        userDao.save(dom);
+//
+//        System.out.println(userDao.findAll());
 
-        System.out.println(userDao.findAll());
-    }
+//        Route home = new Route("jsonString", "Tabernacle Street", "International House", "2019-21-21", 'Y', 'B' , "Startlong", "EndLong", "Endlat", "StartLat", "GBP", "QA", users.add())
+        }
 }
+
