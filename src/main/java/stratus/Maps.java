@@ -28,10 +28,18 @@ public class Maps {
 
         System.out.println("Please enter your mode of transport between walking, driving, bicycling, and transit");
         String mode= scn.next();
+        String transit_mode="N";
+        boolean pref= false;
+        if (mode=="transit"){
+            System.out.println("Do you have a preferred mode of transit? (N for No, bus, subway, train, tram, rail)");
+            transit_mode= scn.next();
+            if (transit_mode!="N"){pref=true; }
+        }
+
 
         //if specified then billed more so only specify it when not now, or if want transit then add now
 
-        System.out.println("Please enter your departure time: nothing for now or yyyy-MM-dd at HH:mm"); /
+        System.out.println("Please enter your departure time: nothing for now or yyyy-MM-dd at HH:mm"); 
         String depTime= stringToTime(scn.next());
 
 
@@ -47,7 +55,11 @@ public class Maps {
            jsonString = har.getRapidApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&mode=" + mode + "&key=" + apiKey);
         }
         else {
-            jsonString = har.getRapidApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&mode=" + mode + "&departure_time" + depTime + "&key=" + apiKey);
+            if((mode=="transit") && (pref==true)){
+                jsonString = har.getRapidApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&mode=" + mode + "&departure_time" + depTime +"&transit_mode="+transit_mode+ "&key=" + apiKey);
+            }
+            else {jsonString = har.getRapidApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&mode=" + mode + "&departure_time" + depTime + "&key=" + apiKey);
+        }
         }
         return PrettyJSON.print(jsonString);
     }
