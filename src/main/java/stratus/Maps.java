@@ -1,24 +1,10 @@
 package stratus;
-
-import com.google.gson.Gson;
-
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
-
-
 import org.json.JSONArray;
-import org.json.JSONException;
+
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 public class Maps {
 
@@ -41,7 +27,6 @@ public class Maps {
         String mode= scn.next();
 
 
-        String prettyJsonString = "";
         //API keys from Googlemaps API docs
         String apiKey = "AIzaSyBktdACICn5zDhtfxywVJRRUuB53aE1V-I";
 
@@ -53,45 +38,10 @@ public class Maps {
 
 
         //Creates a HTTPClient to start the query from the api
-        HttpClient httpClient = HttpClientBuilder.create().build();
-        HttpGet request = new HttpGet("https://maps.googleapis.com/maps/api/directions/json?origin="+origin+"&destination="+destination+"&mode="+mode+"&key="+apiKey);
-        //Pass in using the headers the keys and host info to the get request
+        HttpApiResponse har =new HttpApiResponse();
+        String jsonString= har.getRapidApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin="+origin+"&destination="+destination+"&mode="+mode+"&key="+apiKey);
 
-
-        //System.out.println(request);
-        try {
-            //Performs the HTTP get request
-            HttpResponse response = httpClient.execute(request);
-
-
-
-            //Print the response code for testing purposes to see whether api is successful or not
-            //System.out.println("Response code : "+ response.getStatusLine().getStatusCode());
-            //Gets the response and converts it into a JSON Object
-            String json_string = EntityUtils.toString(response.getEntity());
-
-
-            JSONObject myObject = new JSONObject(json_string);
-
-            //Using Google's GSON library to pretty print the JSON Object so that its readable
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            JsonParser jp = new JsonParser();
-            JsonElement je = jp.parse(myObject.toString());
-            prettyJsonString = gson.toJson(je);
-            //System.out.println(prettyJsonString);
-
-            //Not working yet but trying to read JSON:
-
-
-
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.getLocalizedMessage();
-        }
-        return prettyJsonString;
+        return PrettyJSON.print(jsonString);
     }
 
 
@@ -108,7 +58,28 @@ public static void dataFromAPI(String string){//chose to return the duration and
     System.out.println("duration:"+duration+"\tdistance:"+distance);
 }
 
+public static String getCoordonates(String string){ //method that can be added to get the coordinates for the weather
+    JSONObject myObjectData = new JSONObject(string);
+    JSONArray routes = myObjectData.getJSONArray("routes");
+    JSONObject routes1 = routes.getJSONObject(0);
+    JSONArray legs =routes1.getJSONArray("legs");
+    JSONObject trip=legs.getJSONObject(0);
+    JSONObject endPlace=trip.getJSONObject("end_location");
+    JSONObject startPlace=trip.getJSONObject("start_location");
+    StringJoiner latLong= new StringJoiner(" ");
 
+    latLong.add(startPlace.getString("lat")+",");
+    latLong.add(startPlace.getString("lng"));
+    latLong.add("-");
+    latLong.add(endPlace.getString("lat")+",");
+    latLong.add(endPlace.getString("lng"));
+
+    return latLong.toString();
+
+
+//would be great to find something else that doesn't use Google Maps for prices concerns
+
+}
 
     public static void main(String[] args) {
         scn = new Scanner(System.in);
