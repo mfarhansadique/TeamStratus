@@ -21,7 +21,7 @@ private Date date;
 private boolean favourite;
 private char transportMethod;
 
-@ManyToMany
+    @ManyToMany
 private List<User> users;
 
     public Route(int id, String routeDetails, String startLocation, String endLocation, Date date, boolean favourite, char transportMethod, List<User> users) {

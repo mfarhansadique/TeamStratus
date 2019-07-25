@@ -10,12 +10,12 @@ import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 @EnableJpaRepositories("stratus.data")
 
 public class Config {
+
     @Bean
     public UserDAO userDao() { return new UserDAOSpring(); }
 
-
     @Bean
-    public RouteDAO routeDAO() { return (RouteDAO) new RouteDAOSpring(); }
+    public RouteDAO routeDao() { return (RouteDAO) new RouteDAOSpring(); }
 
     @Bean
     public LocalEntityManagerFactoryBean entityManagerFactory() {

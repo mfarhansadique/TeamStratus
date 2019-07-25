@@ -1,5 +1,6 @@
 package stratus;
 
+import org.hibernate.internal.util.type.PrimitiveWrapperHelper;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.Entity;
@@ -21,21 +22,21 @@ public class User {
     private String login;
     private String password;
     private String email;
-    private int telephoneNumber;
+    private String telephoneNumber;
     private char role;
 
     @ManyToMany
     private List<Route> routes; //make sure that user adds the routes to themselves
 
-    public int getTelephoneNumber() {
+    public String getTelephoneNumber() {
         return telephoneNumber;
     }
 
-    public void setTelephoneNumber(int telephoneNumber) {
+    public void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
     }
 
-    public User(int id, String firstName, String lastName, String address, String city, String postCode, String login, String password, String email, int telephoneNumber, char role, List<Route> routes) {
+    public User(String firstName, String lastName, String address, String city, String postCode, String login, String password, String email, String telephoneNumber, char role, List<Route> routes) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

@@ -1,16 +1,30 @@
 package stratus;
 
-import org.graalvm.compiler.lir.LIRInstruction;
+import org.springframework.beans.factory.annotation.Autowired;
+import stratus.data.UserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAOSpring implements UserDAO {
+    @Autowired
+    private UserRepository userRepository;
+
     public List<String> findAll() {
-        return null;
-
+        ArrayList<String> allUsers = new ArrayList<String>();
+        for (User u : userRepository.findAll()) {
+            allUsers.add(u.getFirstName());}
+        return allUsers;
     }
 
-    public User save(User user) {
-        return null;
+    public boolean save(User user) {
+        userRepository.save(user);
+        return true;
     }
+
+    public User findByLogin(String login) {
+        return null;
+    };
 }
+
+
