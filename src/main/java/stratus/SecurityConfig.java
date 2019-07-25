@@ -10,5 +10,9 @@ import org.springframework.context.annotation.Configuration;
 public class SecurityConfig // extends WebSecurityConfigurationAdaptor
 {
 //see slides for sample code
+//@Override
 //protected void configure(HttpSecurity http) throws Exception {}
 }
+
+
+   // BCryptPasswordEncider encoder = new BCryptPasswordEncider(); - scrambles passwords

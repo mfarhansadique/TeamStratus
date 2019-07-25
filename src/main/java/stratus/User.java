@@ -12,7 +12,6 @@ import java.util.List;
 public class User {
 
     @Id @GeneratedValue
-
     private int id;
     private String firstName;
     private String lastName;
@@ -35,7 +34,7 @@ public class User {
         this.telephoneNumber = telephoneNumber;
     }
 
-    public User(int id, String firstName, String lastName, String address, String city, String postCode, String login, String password, String email) {
+    public User(int id, String firstName, String lastName, String address, String city, String postCode, String login, String password, String email, int telephoneNumber, List<Route> routes) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -45,6 +44,8 @@ public class User {
         this.login = login;
         this.password = password;
         this.email = email;
+        this.telephoneNumber = telephoneNumber;
+        this.routes = routes;
     }
 
     public User() {};

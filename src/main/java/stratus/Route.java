@@ -24,7 +24,7 @@ private char transportMethod;
 @ManyToMany
 private List<User> users;
 
-    public Route(int id, String routeDetails, String startLocation, String endLocation, Date date, boolean favourite, char transportMethod) {
+    public Route(int id, String routeDetails, String startLocation, String endLocation, Date date, boolean favourite, char transportMethod, List<User> users) {
         this.id = id;
         this.routeDetails = routeDetails;
         this.startLocation = startLocation;
@@ -32,6 +32,7 @@ private List<User> users;
         this.date = date;
         this.favourite = favourite;
         this.transportMethod = transportMethod;
+        this.users = users;
     }
 
     public Route(){};
