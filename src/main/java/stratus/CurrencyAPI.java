@@ -21,6 +21,8 @@ import java.util.*;
 
 public class CurrencyAPI {
 
+    private static Scanner scn;
+
 
     private static String getRate() throws MalformedURLException {
 
@@ -69,12 +71,16 @@ public class CurrencyAPI {
         JSONObject myObjectData = new JSONObject(string);
         JSONObject rates= myObjectData.getJSONObject("rates");
         Float UK =rates.getFloat("GBP");
-        Float US =rates.getFloat("USD");
+
+        System.out.println("Please enter the currency you would like the exchange rate of (USD, JPY, EUR or AUD");
+        String country = scn.nextLine();
+
+        Float US =rates.getFloat(country);
 
 
 
 
-        System.out.println("currency rate for GBP to USD is: " + (US/UK));
+        System.out.println("currency rate for GBP to "+country+" is: " + (US/UK));
 
     }
 
@@ -84,6 +90,7 @@ public class CurrencyAPI {
     public static void main(String[] args) throws MalformedURLException {
 
         String string=getRate();
+        scn = new Scanner(System.in);
         printTheRate(string);
     }
 //"GBP": 0.895936,    "USD": 1.11557, "EUR": 1,

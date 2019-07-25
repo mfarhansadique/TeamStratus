@@ -29,7 +29,7 @@ public class Maps {
      */
     private static String getResponse(){//asks for a few basic information for the trip
 
-        System.out.println("Please enter the origin of your travel");//to code later: if enter several words need to be separated by +
+        System.out.println("Please enter the origin of your travel");
         String origin = scn.nextLine();
         origin=origin.replaceAll("\\s","+");
 
