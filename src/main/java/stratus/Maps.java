@@ -39,7 +39,7 @@ public class Maps {
 
         //if specified then billed more so only specify it when not now, or if want transit then add now
 
-        System.out.println("Please enter your departure time: nothing for now or yyyy-MM-dd at HH:mm");
+        System.out.println("Please enter your departure time: N for now or yyyy-MM-dd at HH:mm");
         String depTime= stringToTime(scn.next());
 
 
@@ -78,7 +78,7 @@ private static String stringToTime(String string){
 public static void dataFromAPI(String string){//chose to return the duration and distance of the trip as an example
     JSONObject myObjectData = new JSONObject(string);
     JSONArray routes = myObjectData.getJSONArray("routes");
-    System.out.println("There are "+routes.length()+" routes.");
+    System.out.println("There are "+routes.length()+" route(s).");
     for(int i=0; i<routes.length();i++){
         JSONObject routesElement = routes.getJSONObject(0);
         JSONArray legs =routesElement.getJSONArray("legs");
