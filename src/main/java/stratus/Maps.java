@@ -39,7 +39,7 @@ public class Maps {
 
         //if specified then billed more so only specify it when not now, or if want transit then add now
 
-        System.out.println("Please enter your departure time: nothing for now or yyyy-MM-dd at HH:mm"); 
+        System.out.println("Please enter your departure time: nothing for now or yyyy-MM-dd at HH:mm");
         String depTime= stringToTime(scn.next());
 
 
@@ -78,12 +78,16 @@ private static String stringToTime(String string){
 public static void dataFromAPI(String string){//chose to return the duration and distance of the trip as an example
     JSONObject myObjectData = new JSONObject(string);
     JSONArray routes = myObjectData.getJSONArray("routes");
-    JSONObject routes1 = routes.getJSONObject(0);
-    JSONArray legs =routes1.getJSONArray("legs");
-    JSONObject trip=legs.getJSONObject(0);
-    String duration= trip.getJSONObject("duration").getString("text");
-    String distance= trip.getJSONObject("distance").getString("text");
-    System.out.println("duration:"+duration+"\tdistance:"+distance);
+    System.out.println("There are "+routes.length()+" routes.");
+    for(int i=0; i<routes.length();i++){
+        JSONObject routesElement = routes.getJSONObject(0);
+        JSONArray legs =routesElement.getJSONArray("legs");
+        JSONObject trip=legs.getJSONObject(0);
+        String duration= trip.getJSONObject("duration").getString("text");
+        String distance= trip.getJSONObject("distance").getString("text");
+        System.out.println("duration:"+duration+"\tdistance:"+distance);
+    }
+
 }
 
 public static String getCoordinates(String string){ //method that can be added to get the coordinates for the weather
