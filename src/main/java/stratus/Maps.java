@@ -1,23 +1,8 @@
 package stratus;
-
-import com.google.gson.Gson;
-
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
-
-
 import org.json.JSONArray;
-import org.json.JSONException;
+
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Maps {

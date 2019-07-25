@@ -23,7 +23,7 @@ public class CurrencyAPI {
 
         return PrettyJSON.print(jsonString);
     }
-    
+
     public static void printTheRate(String string){
 
         JSONObject myObjectData = new JSONObject(string);
