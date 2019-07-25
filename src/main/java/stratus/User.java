@@ -22,6 +22,7 @@ public class User {
     private String password;
     private String email;
     private int telephoneNumber;
+    private char role;
 
     @ManyToMany
     private List<Route> routes; //make sure that user adds the routes to themselves
@@ -34,7 +35,7 @@ public class User {
         this.telephoneNumber = telephoneNumber;
     }
 
-    public User(int id, String firstName, String lastName, String address, String city, String postCode, String login, String password, String email, int telephoneNumber, List<Route> routes) {
+    public User(int id, String firstName, String lastName, String address, String city, String postCode, String login, String password, String email, int telephoneNumber, char role, List<Route> routes) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -45,6 +46,7 @@ public class User {
         this.password = password;
         this.email = email;
         this.telephoneNumber = telephoneNumber;
+        this.role = role;
         this.routes = routes;
     }
 
@@ -128,5 +130,13 @@ public class User {
 
     public void setRoutes(List<Route> routes) {
         this.routes = routes;
+    }
+
+    public char getRole() {
+        return role;
+    }
+
+    public void setRole(char role) {
+        this.role = role;
     }
 }
