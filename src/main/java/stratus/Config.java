@@ -13,8 +13,6 @@ public class Config {
     @Bean
     public UserDAO userDao() { return new UserDAOSpring(); }
 
-    @Bean
-    public AdminDAO adminDao() { return (AdminDAO) new AdminDAOSpring(); }
 
     @Bean
     public RouteDAO routeDAO() { return (RouteDAO) new RouteDAOSpring(); }
