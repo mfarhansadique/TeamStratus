@@ -29,7 +29,9 @@ public class Maps {
         System.out.println("Please enter your mode of transport between walking, driving, bicycling, and transit");
         String mode= scn.next();
 
-        System.out.println("Please enter your departure time: nothing for now or yyyy-MM-dd at HH:mm");
+        //if specified then billed more so only specify it when not now, or if want transit then add now
+
+        System.out.println("Please enter your departure time: nothing for now or yyyy-MM-dd at HH:mm"); /
         String depTime= stringToTime(scn.next());
 
 
@@ -40,8 +42,13 @@ public class Maps {
 
         //Creates a HTTPClient to start the query from the api
         HttpApiResponse har =new HttpApiResponse();
-        String jsonString= har.getRapidApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin="+origin+"&destination="+destination+"&mode="+mode+"&departure_time"+depTime+"&key="+apiKey);
-
+        String jsonString;
+        if((depTime=="now") && (mode=="driving")){
+           jsonString = har.getRapidApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&mode=" + mode + "&key=" + apiKey);
+        }
+        else {
+            jsonString = har.getRapidApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&mode=" + mode + "&departure_time" + depTime + "&key=" + apiKey);
+        }
         return PrettyJSON.print(jsonString);
     }
 
