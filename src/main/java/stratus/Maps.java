@@ -41,7 +41,6 @@ public class Maps {
         String mode= scn.next();
 
 
-        String prettyJsonString = "";
         //API keys from Googlemaps API docs
         String apiKey = "AIzaSyBktdACICn5zDhtfxywVJRRUuB53aE1V-I";
 
@@ -53,45 +52,10 @@ public class Maps {
 
 
         //Creates a HTTPClient to start the query from the api
-        HttpClient httpClient = HttpClientBuilder.create().build();
-        HttpGet request = new HttpGet("https://maps.googleapis.com/maps/api/directions/json?origin="+origin+"&destination="+destination+"&mode="+mode+"&key="+apiKey);
-        //Pass in using the headers the keys and host info to the get request
+        HttpApiResponse har =new HttpApiResponse();
+        String jsonString= har.getRapidApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin="+origin+"&destination="+destination+"&mode="+mode+"&key="+apiKey);
 
-
-        //System.out.println(request);
-        try {
-            //Performs the HTTP get request
-            HttpResponse response = httpClient.execute(request);
-
-
-
-            //Print the response code for testing purposes to see whether api is successful or not
-            //System.out.println("Response code : "+ response.getStatusLine().getStatusCode());
-            //Gets the response and converts it into a JSON Object
-            String json_string = EntityUtils.toString(response.getEntity());
-
-
-            JSONObject myObject = new JSONObject(json_string);
-
-            //Using Google's GSON library to pretty print the JSON Object so that its readable
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            JsonParser jp = new JsonParser();
-            JsonElement je = jp.parse(myObject.toString());
-            prettyJsonString = gson.toJson(je);
-            //System.out.println(prettyJsonString);
-
-            //Not working yet but trying to read JSON:
-
-
-
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.getLocalizedMessage();
-        }
-        return prettyJsonString;
+        return PrettyJSON.print(jsonString);
     }
 
 

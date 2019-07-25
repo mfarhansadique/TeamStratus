@@ -24,7 +24,7 @@ public class HttpApiResponse {
     }
 
     public String getRapidApiResponse(String url){
-        JSONObject toReturnJson = new JSONObject();
+
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpGet request = new HttpGet(url);
         request.addHeader("X-RapidAPI-Host",hostAddress);
@@ -33,7 +33,7 @@ public class HttpApiResponse {
     }
 
     public String getApiResponse(String url){
-        JSONObject toReturnJson = new JSONObject();
+
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpGet request = new HttpGet(url);
         return getJson(request,httpClient).toString();
