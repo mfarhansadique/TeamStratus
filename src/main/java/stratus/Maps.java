@@ -30,10 +30,12 @@ public class Maps {
     private static String getResponse(){//asks for a few basic information for the trip
 
         System.out.println("Please enter the origin of your travel");//to code later: if enter several words need to be separated by +
-        String origin = scn.next();
+        String origin = scn.nextLine();
+        origin=origin.replaceAll("\\s","+");
 
         System.out.println("Please enter your destination");
-        String destination= scn.next();
+        String destination= scn.nextLine();
+        destination=destination.replaceAll("\\s","+");
 
         System.out.println("Please enter your mode of transport between walking, driving, bicycling, and transit");
         String mode= scn.next();
@@ -56,7 +58,7 @@ public class Maps {
         //Pass in using the headers the keys and host info to the get request
 
 
-        System.out.println(request);
+        //System.out.println(request);
         try {
             //Performs the HTTP get request
             HttpResponse response = httpClient.execute(request);
@@ -64,7 +66,7 @@ public class Maps {
 
 
             //Print the response code for testing purposes to see whether api is successful or not
-            System.out.println("Response code : "+ response.getStatusLine().getStatusCode());
+            //System.out.println("Response code : "+ response.getStatusLine().getStatusCode());
             //Gets the response and converts it into a JSON Object
             String json_string = EntityUtils.toString(response.getEntity());
 
