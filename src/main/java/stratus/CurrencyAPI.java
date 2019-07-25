@@ -20,7 +20,7 @@ public class CurrencyAPI {
 
         HttpApiResponse har =new HttpApiResponse();
         String jsonString= har.getRapidApiResponse("http://data.fixer.io/api/" + endpoint + "?access_key=" + access_key);
-
+        System.out.println(PrettyJSON.print(jsonString));
         return PrettyJSON.print(jsonString);
     }
 

@@ -3,6 +3,9 @@ import org.json.JSONArray;
 
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.StringJoiner;
 
@@ -26,25 +29,31 @@ public class Maps {
         System.out.println("Please enter your mode of transport between walking, driving, bicycling, and transit");
         String mode= scn.next();
 
+        System.out.println("Please enter your departure time: nothing for now or yyyy-MM-dd at HH:mm");
+        String depTime= stringToTime(scn.next());
+
+
 
         //API keys from Googlemaps API docs
         String apiKey = "AIzaSyBktdACICn5zDhtfxywVJRRUuB53aE1V-I";
 
-//Example:
-        //String origin = "Disneyland";
-        //String destination = "Universal Studios";
-        //String mode ="driving";//walking, driving, bicycling, transit
-        //lots of other options can be added
-
 
         //Creates a HTTPClient to start the query from the api
         HttpApiResponse har =new HttpApiResponse();
-        String jsonString= har.getRapidApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin="+origin+"&destination="+destination+"&mode="+mode+"&key="+apiKey);
+        String jsonString= har.getRapidApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin="+origin+"&destination="+destination+"&mode="+mode+"&departure_time"+depTime+"&key="+apiKey);
 
         return PrettyJSON.print(jsonString);
     }
 
+private static String stringToTime(String string){
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm");
+    try {Date dt = sdf.parse(string);
+    long epoch = dt.getTime();
+    return Long.toString(epoch/1000);}
 
+    catch(ParseException e){return "now";}
+
+}
 
 
 public static void dataFromAPI(String string){//chose to return the duration and distance of the trip as an example
@@ -58,7 +67,7 @@ public static void dataFromAPI(String string){//chose to return the duration and
     System.out.println("duration:"+duration+"\tdistance:"+distance);
 }
 
-public static String getCoordonates(String string){ //method that can be added to get the coordinates for the weather
+public static String getCoordinates(String string){ //method that can be added to get the coordinates for the weather
     JSONObject myObjectData = new JSONObject(string);
     JSONArray routes = myObjectData.getJSONArray("routes");
     JSONObject routes1 = routes.getJSONObject(0);
@@ -85,6 +94,7 @@ public static String getCoordonates(String string){ //method that can be added t
         scn = new Scanner(System.in);
         String string= getResponse();
         dataFromAPI(string);
+
 
     }
 

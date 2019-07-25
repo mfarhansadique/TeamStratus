@@ -19,6 +19,20 @@ public class WeatherAPI {
         return apiCaller.getRapidApiResponse("https://dark-sky.p.rapidapi.com/"+ lat +","+ lon +"?lang=en&units=auto");
 
     }
+    private static String[] breaksMapsOutput(String bigString){ //built to come after Maps.getCoordinates, returns two responses for start and finish
+
+        String[] parts = bigString.split("-");
+        String startB=parts[0];
+        String endB=parts[1];
+        String[] partS=startB.split(",");
+        String[] partE=endB.split(",");
+
+        String a= getWeatherByLatLon(partS[0],partS[1]);
+        String b= getWeatherByLatLon(partE[0],partE[1]);
+        String[] array={a,b};
+        return array;
+
+    }
 
     private static String getWeatherByAirportCode(String airportCode){
         double lat;
