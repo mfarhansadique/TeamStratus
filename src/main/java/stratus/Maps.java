@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 public class Maps {
 
@@ -57,7 +58,28 @@ public static void dataFromAPI(String string){//chose to return the duration and
     System.out.println("duration:"+duration+"\tdistance:"+distance);
 }
 
+public static String getCoordonates(String string){ //method that can be added to get the coordinates for the weather
+    JSONObject myObjectData = new JSONObject(string);
+    JSONArray routes = myObjectData.getJSONArray("routes");
+    JSONObject routes1 = routes.getJSONObject(0);
+    JSONArray legs =routes1.getJSONArray("legs");
+    JSONObject trip=legs.getJSONObject(0);
+    JSONObject endPlace=trip.getJSONObject("end_location");
+    JSONObject startPlace=trip.getJSONObject("start_location");
+    StringJoiner latLong= new StringJoiner(" ");
 
+    latLong.add(startPlace.getString("lat")+",");
+    latLong.add(startPlace.getString("lng"));
+    latLong.add("-");
+    latLong.add(endPlace.getString("lat")+",");
+    latLong.add(endPlace.getString("lng"));
+
+    return latLong.toString();
+
+
+//would be great to find something else that doesn't use Google Maps for prices concerns
+
+}
 
     public static void main(String[] args) {
         scn = new Scanner(System.in);
