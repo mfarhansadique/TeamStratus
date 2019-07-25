@@ -25,7 +25,7 @@ public class Maps {
      * This class takes the URL, and with the API keys will use HTTP client to get a response to form a JSON object.
      * @param url Provide the URL to to get the api JSON response from
      */
-    private static String getResponse(){
+    private static String getResponse(){//asks for a few basic information for the trip
 
         System.out.println("Please enter the origin of your travel");//to code later: if enter several words need to be separated by +
         String origin = scn.next();
@@ -93,7 +93,7 @@ public class Maps {
 
 
 
-public static void dataFromAPI(String string){
+public static void dataFromAPI(String string){//chose to return the duration and distance of the trip as an example
     JSONObject myObjectData = new JSONObject(string);
     JSONArray routes = myObjectData.getJSONArray("routes");
     JSONObject routes1 = routes.getJSONObject(0);
