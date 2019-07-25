@@ -12,7 +12,7 @@ import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 public class Config {
 
     @Bean
-    public UserDAO userDao() { return new UserDAOSpring(); }
+    public UserDAO memberDao() { return new UserDAOSpring(); }
 
     @Bean
     public RouteDAO routeDao() { return (RouteDAO) new RouteDAOSpring(); }

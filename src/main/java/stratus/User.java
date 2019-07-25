@@ -1,19 +1,14 @@
 package stratus;
 
-import org.hibernate.internal.util.type.PrimitiveWrapperHelper;
-import org.springframework.data.annotation.Id;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity @Table(name="user")
 public class User {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String firstName;
     private String lastName;
     private String address;
@@ -37,7 +32,7 @@ public class User {
     }
 
     public User(String firstName, String lastName, String address, String city, String postCode, String login, String password, String email, String telephoneNumber, char role, List<Route> routes) {
-        this.id = id;
+//        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;

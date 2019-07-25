@@ -24,7 +24,8 @@ public class UserDAOSpring implements UserDAO {
 
     public User findByLogin(String login) {
         return null;
-    };
+    }
+
 }
 
 
