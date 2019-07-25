@@ -5,7 +5,7 @@ import org.json.JSONObject;
 import java.util.Scanner;
 
 public class WeatherAPI {
-
+//Ignore
 
     private static Scanner scn;
 
