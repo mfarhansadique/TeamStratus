@@ -1,4 +1,7 @@
 /.idea*
 *.idea*
+
 /target*
-Stratus.files.iml
+
+.idea/
+

@@ -1,10 +1,12 @@
 package stratus;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import stratus.data.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class UserDAOSpring implements UserDAO {
     @Autowired
@@ -21,6 +23,7 @@ public class UserDAOSpring implements UserDAO {
         userRepository.save(user);
         return true;
     }
+
 
 
     @Override
@@ -47,6 +50,12 @@ public class UserDAOSpring implements UserDAO {
             }
         }
         return false;
+
+    public User findByLogin(String login) {
+        User u;
+        u = userRepository.findByLogin(login);
+        return u;
+
     }
 
 

@@ -1,6 +1,7 @@
 package stratus;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity @Table(name="user")
@@ -20,8 +21,10 @@ public class User {
     private String telephoneNumber;
     private char role;
 
-    @ManyToMany
-    private List<Route> routes; //make sure that user adds the routes to themselves
+//    cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+
+    @ManyToMany (fetch= FetchType.EAGER,mappedBy = "user")
+    private List<Route> route = new ArrayList<>();; //make sure that user adds the routes to themselves
 
     public String getTelephoneNumber() {
         return telephoneNumber;
@@ -31,7 +34,8 @@ public class User {
         this.telephoneNumber = telephoneNumber;
     }
 
-    public User(String firstName, String lastName, String address, String city, String postCode, String login, String password, String email, String telephoneNumber, char role, List<Route> routes) {
+    public User(String firstName, String lastName, String address, String city, String postCode, String login,
+                String password, String email, String telephoneNumber, char role, List<Route> route) {
 //        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -43,7 +47,7 @@ public class User {
         this.email = email;
         this.telephoneNumber = telephoneNumber;
         this.role = role;
-        this.routes = routes;
+        this.route = route;
     }
 
     public User() {};
@@ -120,12 +124,12 @@ public class User {
         this.email = email;
     }
 
-    public List<Route> getRoutes() {
-        return routes;
+    public List<Route> getRoute() {
+        return route;
     }
 
-    public void setRoutes(List<Route> routes) {
-        this.routes = routes;
+    public void setRoute(List<Route> routes) {
+        this.route = route;
     }
 
     public char getRole() {
