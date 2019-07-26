@@ -52,13 +52,13 @@ public class Maps {
         HttpApiResponse har =new HttpApiResponse();
         String jsonString;
         if((depTime=="now") && (mode=="driving")){
-           jsonString = har.getRapidApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&mode=" + mode + "&key=" + apiKey);
+           jsonString = har.getApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&mode=" + mode + "&key=" + apiKey);
         }
         else {
             if((mode=="transit") && (pref==true)){
-                jsonString = har.getRapidApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&mode=" + mode + "&departure_time" + depTime +"&transit_mode="+transit_mode+ "&key=" + apiKey);
+                jsonString = har.getApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&mode=" + mode + "&departure_time" + depTime +"&transit_mode="+transit_mode+ "&key=" + apiKey);
             }
-            else {jsonString = har.getRapidApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&mode=" + mode + "&departure_time" + depTime + "&key=" + apiKey);
+            else {jsonString = har.getApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&mode=" + mode + "&departure_time" + depTime + "&key=" + apiKey);
         }
         }
         return PrettyJSON.print(jsonString);
@@ -116,7 +116,7 @@ public static String getCoordinates(String string){ //method that can be added t
 public static String getCountryCode(String lat, String lng) {
     String apiKey = "AIzaSyBktdACICn5zDhtfxywVJRRUuB53aE1V-I";
     HttpApiResponse har = new HttpApiResponse();
-    String jsonString = har.getRapidApiResponse("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&key=" + apiKey);
+    String jsonString = har.getApiResponse("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&key=" + apiKey);
     String j = PrettyJSON.print(jsonString);
     JSONObject myObjectData = new JSONObject(j);
     JSONArray results = myObjectData.getJSONArray("results").getJSONObject(0).getJSONArray("address_components");

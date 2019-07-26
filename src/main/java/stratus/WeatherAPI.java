@@ -47,7 +47,7 @@ public class WeatherAPI {
 
     public static void main(String[] args) {
         scn = new Scanner(System.in);
-        System.out.println(getWeatherByAirportCode("LHR"));
+        System.out.println(PrettyJSON.print(getWeatherByLatLon("51.89381100000001","-0.2873046")));
 
     }
 }
