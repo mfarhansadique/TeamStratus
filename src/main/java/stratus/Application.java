@@ -18,18 +18,18 @@ public class Application {
 //        User dom = new User("Dominika", "Malinowska", "246 Priory Road", "Birmingham",
 //                "B28 0SU", "dom", "password", "do_ma1991@hotmail.com",
 //                "07904295900", 'A', null );
-        User issi = new User("Rose", "DE", "246 Priory Road", "Birmingham",
-                "B28 0SU", "rose", "password", "do_ma1991@hotmail.com",
+        User issi = new User("Dom", "DE", "246 Priory Road", "Birmingham",
+                "B28 0SU", "farhan", "password", "do_ma1991@hotmail.com",
                 "07904295900", 'A', null );
 //        userDao.save(dom);
 //        userDao.save(issi);
 //
 //        System.out.println(userDao.findAll());
 
-        Route home = new Route("jsonString", "St C Street", "International House",
+        Route home = new Route("jsonString", "Happy Street", "International House",
                 LocalDate.of(2019,07,25), true, 'B' , "Startlong",
                 "EndLong", "Endlat", "StartLat", "GBP", "QA",
-                Arrays.asList(userDao.findByLogin("rose")));
+                Arrays.asList(userDao.findByLogin("farhan")));
 
         routeDao.save(home);
 

@@ -15,6 +15,8 @@ public class User {
     private String address;
     private String city;
     private String postCode;
+
+    @Column(unique = true)
     private String login;
     private String password;
     private String email;
