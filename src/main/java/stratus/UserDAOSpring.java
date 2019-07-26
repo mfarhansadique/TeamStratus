@@ -26,6 +26,41 @@ public class UserDAOSpring implements UserDAO {
         return null;
     }
 
+    @Override
+    public List<User> getAllUsers() {
+        List<User> allUsers = new ArrayList<User>();
+        for (User u : userRepository.findAll()) {
+            allUsers.add(u);
+        }
+        return allUsers;
+    }
+
+    @Override
+    public boolean insertUser(User user) {
+       userRepository.save(user);
+        return true;
+    }
+
+    @Override
+    public boolean deleteUser(User user) {
+        for (User u : getAllUsers()) {
+            if (u.getId() == user.getId()) {
+                userRepository.delete(user);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    @Override
+    public User getUserById(int id) {
+
+        return userRepository.findById(id).get();
+    }
+
+
+
 }
 
 
