@@ -22,9 +22,6 @@ public class UserDAOSpring implements UserDAO {
         return true;
     }
 
-    public User findByLogin(String login) {
-        return null;
-    }
 
     @Override
     public List<User> getAllUsers() {
