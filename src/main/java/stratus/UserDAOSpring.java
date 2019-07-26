@@ -1,11 +1,13 @@
 package stratus;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import stratus.data.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Transactional
 public class UserDAOSpring implements UserDAO {
     @Autowired
     private UserRepository userRepository;

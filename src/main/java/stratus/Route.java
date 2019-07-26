@@ -1,6 +1,8 @@
 package stratus;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +17,7 @@ public class Route {
     private String routeDetails;
     private String startLocation;
     private String endLocation;
-    private Date date;
+    private LocalDate date;
     private boolean favourite;
     private char transportMethod;
     private String startLongitude;
@@ -28,7 +30,9 @@ public class Route {
     @ManyToMany
     private List<User> users = new ArrayList<User>();
 
-    public Route(String routeDetails, String startLocation, String endLocation, Date date, boolean favourite, char transportMethod, String startLongitude, String endLongitude, String endLatitude, String startLatitude, String currency, String locationName, List<User> users) {
+    public Route(String routeDetails, String startLocation, String endLocation, LocalDate date, boolean favourite,
+                 char transportMethod, String startLongitude, String endLongitude, String endLatitude, String startLatitude,
+                 String currency, String locationName, List<User> users) {
         this.routeDetails = routeDetails;
         this.startLocation = startLocation;
         this.endLocation = endLocation;
@@ -81,11 +85,11 @@ public class Route {
         this.endLocation = endLocation;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -109,8 +113,9 @@ public class Route {
         return users;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+
+    public void addUser(User user) {
+        this.users.add(user);
     }
 
     public String getStartLongitude() {
