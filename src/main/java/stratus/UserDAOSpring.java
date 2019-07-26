@@ -50,6 +50,7 @@ public class UserDAOSpring implements UserDAO {
             }
         }
         return false;
+    }
 
     public User findByLogin(String login) {
         User u;

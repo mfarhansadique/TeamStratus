@@ -4,13 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-@SpringBootApplication
-
-
 import java.time.LocalDate;
 import java.util.Arrays;
 
+@SpringBootApplication
 
 public class Application {
     private UserDAO userDao;
@@ -19,7 +16,7 @@ public class Application {
     public static void main(String[] args) {
 
         SpringApplication.run(Application.class, args);
-    }
+
 //    public static void main(String[] args) {
 //        ApplicationContext ctx = new AnnotationConfigApplicationContext("stratus");
 //        UserDAO userDao = ctx.getBean(UserDAO.class);
@@ -32,7 +29,7 @@ public class Application {
 //
 //        System.out.println(userDao.findAll());
 //    }
-}
+//}
 
         ApplicationContext ctx = new AnnotationConfigApplicationContext("stratus");
         UserDAO userDao = ctx.getBean(UserDAO.class);
