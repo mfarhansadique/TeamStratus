@@ -113,6 +113,25 @@ public static String getCoordinates(String string){ //method that can be added t
 
 }
 
+public static String getCountryCode(String lat, String lng) {
+    String apiKey = "AIzaSyBktdACICn5zDhtfxywVJRRUuB53aE1V-I";
+    HttpApiResponse har = new HttpApiResponse();
+    String jsonString = har.getRapidApiResponse("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&key=" + apiKey);
+    String j = PrettyJSON.print(jsonString);
+    JSONObject myObjectData = new JSONObject(j);
+    JSONArray results = myObjectData.getJSONArray("results").getJSONObject(0).getJSONArray("address_components");
+    for (int i = 0; i < results.length(); i++) {
+        JSONArray u = results.getJSONObject(i).getJSONArray("types");
+        System.out.println(u);
+        if (u.getString(0).equals("country") ){
+            return results.getJSONObject(i).getString("short_name");
+        }
+
+
+    }
+    return "GBP";
+}
+
     public static void main(String[] args) {
         scn = new Scanner(System.in);
         String string= getResponse();
@@ -121,6 +140,9 @@ public static String getCoordinates(String string){ //method that can be added t
 
     }
 
-}
+
+    }
+
+
 
 
