@@ -27,12 +27,15 @@ public class Route {
     private String currency;
     private String locationName;
 
-    @ManyToMany
-    private List<User> users = new ArrayList<User>();
+//    cascade = {CascadeType.PERSIST, CascadeType.MERGE}
+
+    @ManyToMany (fetch= FetchType.EAGER)
+    @JoinTable (name = "user_route" , joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "route_id")})
+    private List<User> user = new ArrayList<User>();
 
     public Route(String routeDetails, String startLocation, String endLocation, LocalDate date, boolean favourite,
                  char transportMethod, String startLongitude, String endLongitude, String endLatitude, String startLatitude,
-                 String currency, String locationName, List<User> users) {
+                 String currency, String locationName, List<User> user) {
         this.routeDetails = routeDetails;
         this.startLocation = startLocation;
         this.endLocation = endLocation;
@@ -45,13 +48,11 @@ public class Route {
         this.startLatitude = startLatitude;
         this.currency = currency;
         this.locationName = locationName;
-        this.users = users;
+        this.user = user;
     }
 
     public Route() {
     }
-
-    ;
 
     public int getId() {
         return id;
@@ -109,13 +110,13 @@ public class Route {
         this.transportMethod = transportMethod;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<User> getUser() {
+        return user;
     }
 
 
     public void addUser(User user) {
-        this.users.add(user);
+        this.user.add(user);
     }
 
     public String getStartLongitude() {

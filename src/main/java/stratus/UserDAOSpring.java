@@ -7,7 +7,7 @@ import stratus.data.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-@Transactional
+
 public class UserDAOSpring implements UserDAO {
     @Autowired
     private UserRepository userRepository;
@@ -25,7 +25,9 @@ public class UserDAOSpring implements UserDAO {
     }
 
     public User findByLogin(String login) {
-        return null;
+        User u;
+        u = userRepository.findByLogin(login);
+        return u;
     }
 
 }
