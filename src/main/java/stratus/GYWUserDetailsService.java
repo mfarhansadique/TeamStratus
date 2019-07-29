@@ -39,11 +39,11 @@ public class GYWUserDetailsService implements UserDetailsService {
             }
 
             public String getPassword() {
-                return null;
+                return user.getPassword();
             }
 
             public String getUsername() {
-                return null;
+                return user.getLogin();
             }
 
             public boolean isAccountNonExpired() {
