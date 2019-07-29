@@ -103,6 +103,9 @@ display: inline-block;
 form{
 align: centre;
 }
+#map {
+        height: 100%;
+      }
 
 footer {
 display: block;

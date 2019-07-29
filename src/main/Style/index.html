@@ -4,36 +4,59 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <script src="main.js"></script>
     <link rel="stylesheet" href="main.css">
 </head>
 
 <body>
 
-<div class="topnav">
-    <a href="#Signin">Sign in</a>
-    <a href="#Login">Login</a>
+<nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">GetYourWay</span>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="signin">Sign In</button>
+</nav>
 
-</div>
+<!--<div class="topnav">-->
+<!--    <a href="#Signin">Sign in</a>-->
+<!--    <a href="#Login">Login</a>-->
 
+<!--</div>-->
 
-<h1>GET YOUR WAY </h1>
-<form>
-    <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+<div class ="container">
+<form class="w-50 mx-auto">
+    <div class="form-group>
+        <label for="departure">From</label>
+        <input type="departure" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="From....">
     </div>
     <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        <label for="exampleInputPassword1">To</label>
+        <input type="destination" class="form-control" id="exampleInputPassword1" placeholder="To....">
     </div>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    <div class="form-check form-check-inline">
+        <input type="checkbox" class="form-check-input" id="bike_mode">
+        <label class="form-check-label" for="bike_mode">Bike</label>
+        <input type="checkbox" class="form-check-input" id="walk_mode">
+        <label class="form-check-label" for="walk_mode">Walk</label>
+        <input type="checkbox" class="form-check-input" id="publictransport_mode">
+        <label class="form-check-label" for="publictransport_mode">Public Transport</label>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+<div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+    <div id="map"></div>
+</div>
+<!--<script>-->
+<!--      var map;-->
+<!--      function initMap() {-->
+<!--        map = new google.maps.Map(document.getElementById('map'), {-->
+<!--          center: {lat: -34.397, lng: 150.644},-->
+<!--          zoom: 8-->
+<!--        });-->
+<!--      }-->
+<!--    </script>-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBktdACICn5zDhtfxywVJRRUuB53aE1V-I&callback=initMap"
+        async defer></script>
+
 <!--<form class="Search">-->
 <!--    <input type="text" placeholder="From"><br>-->
 <!--    <input type="text" placeholder="To">-->
@@ -50,10 +73,16 @@
 <!--    <input type="radio" name="transport" value="Plane"> Plane-->
 <!--    </form>-->
 <!--</form>-->
+</div>
+<footer class="page-footer font-small blue">
 
-<footer>
-
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2018 Copyright:
+        <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+    </div>
+    <!-- Copyright -->
 
 </footer>
+
 </body>
 </html>
