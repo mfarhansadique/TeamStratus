@@ -27,7 +27,7 @@ public class User {
 //    cascade = {CascadeType.PERSIST, CascadeType.MERGE},
 
     @ManyToMany (fetch= FetchType.EAGER,mappedBy = "user")
-    private List<Route> route = new ArrayList<>();; //make sure that user adds the routes to themselves
+    private List<Route> route = new ArrayList<>(); //make sure that user adds the routes to themselves
 
     public String getTelephoneNumber() {
         return telephoneNumber;

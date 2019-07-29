@@ -14,7 +14,7 @@ public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String routeDetails;
+    private String routeDetails;//holds json data
     private String startLocation;
     private String endLocation;
     private LocalDate date;
