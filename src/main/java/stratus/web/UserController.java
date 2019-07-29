@@ -21,6 +21,12 @@ public class UserController {
 
     }
 
+    @GetMapping("/users/restrict")
+    public List<User> getSecureUsers() {
+        return userDAO.getAllUsers();
+
+    }
+
     @PostMapping("/users")
     @ResponseStatus(HttpStatus.CREATED)
     User newUser(@RequestBody User newUser) {
