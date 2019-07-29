@@ -75,21 +75,13 @@ public class WeatherAPI {
         return result;
     }
 
-    /*Not ready yet
-
-    private static String[] outputWeatherPast(String lat, String lon, String time){
-
+    private static String outputWeatherPast(String lat, String lon, String time){
+//time can be UNIX or [YYYY]-[MM]-[DD]T[HH]:[MM]:[SS][timezone]
         String string=PrettyJSON.print(apiCaller.getRapidApiResponse("https://dark-sky.p.rapidapi.com/"+ lat +","+ lon +","+time+"?lang=en&units=auto"));
         JSONObject myObjectData = new JSONObject(string);
-        Float temp= myObjectData.getJSONObject("daily").getJSONArray("data").getJSONObject(0).getFloat("temperature");
-
-        String summary=myObjectData.getJSONObject("daily").getJSONArray("data").getJSONObject(0).getString("icon");
-        String icon=myObjectData.getJSONObject("daily").getJSONArray("data").getJSONObject(0).getString("summary");
-        String temps=temp.toString();
-
-        String[] result=new String[]{temps,icon,summary};
-        return result;
-    }*/
+        String summary=myObjectData.getJSONObject("currently").getString("icon");
+        return summary;
+    }
 
     public static void main(String[] args) {
         scn = new Scanner(System.in);
