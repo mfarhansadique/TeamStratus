@@ -9,7 +9,7 @@ http://java.sun.com/xml/ns/persistence "
     <persistence-unit name="users">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:mysql://3.8.131.6:3306/employeedb"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://35.176.107.37:3306/getyourway"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
             <property name="hibernate.connection.username" value="root"/>
             <property name="hibernate.connection.password" value="password"/>
