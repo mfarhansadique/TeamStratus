@@ -75,9 +75,11 @@ public class WeatherAPI {
         return result;
     }
 
+    /*Not ready yet
+
     private static String[] outputWeatherPast(String lat, String lon, String time){
-        // have to create a new function that does everything since different http request
-        apiCaller.getRapidApiResponse("https://dark-sky.p.rapidapi.com/"+ lat +","+ lon +"?lang=en&units=auto");
+
+        String string=PrettyJSON.print(apiCaller.getRapidApiResponse("https://dark-sky.p.rapidapi.com/"+ lat +","+ lon +","+time+"?lang=en&units=auto"));
         JSONObject myObjectData = new JSONObject(string);
         Float temp= myObjectData.getJSONObject("daily").getJSONArray("data").getJSONObject(0).getFloat("temperature");
 
@@ -87,7 +89,7 @@ public class WeatherAPI {
 
         String[] result=new String[]{temps,icon,summary};
         return result;
-    }
+    }*/
 
     public static void main(String[] args) {
         scn = new Scanner(System.in);
