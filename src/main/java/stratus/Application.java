@@ -31,10 +31,10 @@ public class Application {
 //        User issi = new User("Dom", "DE", "246 Priory Road", "Birmingham",
 //                "B28 0SU", "farhan", "password", "do_ma1991@hotmail.com",
 //                "07904295900", 'A', null );
-        userDao.save(dom);
+//        userDao.save(dom);
 //        userDao.save(issi);
 //
-        System.out.println(userDao.findAll());
+//        System.out.println(userDao.findAll());
 //
 //        Route home = new Route("jsonString", "Happy Street", "International House",
 //                LocalDate.of(2019,07,25), true, 'B' , "Startlong",
