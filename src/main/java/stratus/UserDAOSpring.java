@@ -56,7 +56,6 @@ public class UserDAOSpring implements UserDAO {
         User u;
         u = userRepository.findByLogin(login);
         return u;
-
     }
 
 

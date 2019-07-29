@@ -33,7 +33,7 @@ public class GYWUserDetailsService implements UserDetailsService {
                 GrantedAuthority ga = new GrantedAuthority() {
                     @Override
                     public String getAuthority() {
-                        return Character.toString(user.getRole());}
+                        return user.getRole();}
                 };
                 return Collections.singleton(ga);
             }

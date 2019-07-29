@@ -27,7 +27,7 @@ public class Application {
 
         User dom = new User("Dominika", "Malinowska", "246 Priory Road", "Birmingham",
                 "B28 0SU", "dom", "password", "do_ma1991@hotmail.com",
-                "07904295900", 'A', null );
+                "07904295900", "Admin", "photoLocation.jpeg", null );
 //        User issi = new User("Dom", "DE", "246 Priory Road", "Birmingham",
 //                "B28 0SU", "farhan", "password", "do_ma1991@hotmail.com",
 //                "07904295900", 'A', null );
