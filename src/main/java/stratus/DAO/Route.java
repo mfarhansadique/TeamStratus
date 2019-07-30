@@ -35,6 +35,18 @@ public class Route {
     @JoinTable (name = "user_route" , joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "route_id")})
     private List<User> user = new ArrayList<User>();
 
+    public Route(String routeDetails, String startLocation, String endLocation, String startLongitude, String startLatitude, String endLongitude, String endLatitude,  List<User> user) {
+        this.routeDetails = routeDetails;
+        this.startLocation = startLocation;
+        this.endLocation = endLocation;
+        this.startLongitude = startLongitude;
+        this.startLatitude = startLatitude;
+        this.endLongitude = endLongitude;
+        this.endLatitude = endLatitude;
+        transportMethod = 'f';
+        this.user = user;
+    }
+
     public Route(String startLocation, String endLocation, String date, char transportMethod) {
         this.startLocation = startLocation;
         this.endLocation = endLocation;
