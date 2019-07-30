@@ -1,15 +1,11 @@
 package stratus;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import java.time.LocalDate;
-import java.util.Arrays;
-import stratus.RouteDAO;
-import stratus.UserDAO;
+import stratus.DAO.RouteDAO;
+import stratus.DAO.UserDAO;
 
 @SpringBootApplication
 
