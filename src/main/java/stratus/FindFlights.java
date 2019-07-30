@@ -1,6 +1,9 @@
 package stratus;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class FindFlights {
@@ -15,13 +18,18 @@ public class FindFlights {
      * This method uses Scanner and System in to get inputs to perform a location query which will print a JSON Object
      * containing all the corresponding Airports associated with the string using the getResponse method.
      */
-    public static JSONObject printLocationData(HttpApiResponse resP, String localInput){
-       // System.out.println("Please enter a location");
-       // String localInput = scn.next();
+    public static List<String> printLocationData(HttpApiResponse resP, String localInput){
+        ArrayList<String> listOfAirports = new ArrayList<>();
         String url = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/GBP/en-GB/?query="+localInput;
         JSONObject objToReturn = new JSONObject(resP.getRapidApiResponse(url));
-        objToReturn.getJSONArray("places");
-        return objToReturn;
+        JSONArray arr = objToReturn.getJSONArray("Places");
+        for (int i = 0; i < arr.length() ; i++) {
+            String code = arr.getJSONObject(i).getString("PlaceId");
+            String nameAirport = arr.getJSONObject(i).getString("PlaceName");
+            code = code.substring(0,code.length()-4);
+            listOfAirports.add(code+","+nameAirport);
+        }
+        return listOfAirports;
     }
     /**
      * This method uses Scanner and System in to get inputs to perform a quotes for flights search which will print a
@@ -67,7 +75,7 @@ public class FindFlights {
     public static void main(String[] args) {
         scn = new Scanner(System.in);
         HttpApiResponse resP = new HttpApiResponse(apiKey,host);
-        chooseInput(resP);
+        //printLocationData(resP);
     }
 
 }
