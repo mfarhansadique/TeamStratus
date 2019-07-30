@@ -57,13 +57,13 @@
             <div class="row justify-content-center">
                 <div class="col-sm-4">
             Password:
-            <input type="text" name="password" required>
+            <input type="text" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" required>
                 </div></div>
             <input type="hidden" name="role" value="User">
             <div class="row justify-content-center">
                 <div class="col-sm-4">
             Upload photo:
-            <input type="text" name="photo" required>
+            <input type="file" name="photo" accept="image/*" required>
                 </div></div>
             <input type="hidden" name="route" value="null">
             <div class="row justify-content-center">

@@ -65,6 +65,16 @@ public class UserDAOSpring implements UserDAO {
         return userRepository.findById(id).get();
     }
 
+    // update method - NEEDS WORK! currently overwrites all data instead of updating individual fields
+    public boolean update(User user) {
+        for (User u : getAllUsers()) {
+            if (u.getId() == user.getId()) {
+                userRepository.save(user);
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 }
