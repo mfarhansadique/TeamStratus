@@ -1,4 +1,6 @@
-package stratus;
+package stratus.DAO;
+
+import stratus.DAO.Route;
 
 import javax.persistence.*;
 import java.util.ArrayList;

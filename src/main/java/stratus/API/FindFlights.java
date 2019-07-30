@@ -1,4 +1,5 @@
-package stratus;
+package stratus.API;
+
 import java.util.Scanner;
 
 public class FindFlights {

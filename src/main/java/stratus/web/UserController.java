@@ -4,8 +4,8 @@ package stratus.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import stratus.User;
-import stratus.UserDAO;
+import stratus.DAO.User;
+import stratus.DAO.UserDAO;
 
 import java.util.List;
 
