@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 @Entity
 @Table(name = "route")
@@ -14,16 +15,17 @@ public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String routeDetails;
+    private String routeDetails;// will store
     private String startLocation;
     private String endLocation;
-    private LocalDate date;
+    private String date; //format: "yyyy-MM-dd 'at' HH:mm"
     private boolean favourite;
-    private char transportMethod;
+    private char transportMethod; // to do: translation method
     private String startLongitude;
+    private String startLatitude;
     private String endLongitude;
     private String endLatitude;
-    private String startLatitude;
+
     private String currency;
     private String locationName;
 
@@ -33,8 +35,18 @@ public class Route {
     @JoinTable (name = "user_route" , joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "route_id")})
     private List<User> user = new ArrayList<User>();
 
-    public Route(String routeDetails, String startLocation, String endLocation, LocalDate date, boolean favourite,
-                 char transportMethod, String startLongitude, String endLongitude, String endLatitude, String startLatitude,
+    public Route(String startLocation, String endLocation, String date, char transportMethod) {
+        this.startLocation = startLocation;
+        this.endLocation = endLocation;
+        this.date = date;
+        this.transportMethod = transportMethod;
+
+
+
+    }
+
+    public Route(String routeDetails, String startLocation, String endLocation, String date, boolean favourite,
+                 char transportMethod, String startLongitude, String startLatitude,String endLongitude, String endLatitude,
                  String currency, String locationName, List<User> user) {
         this.routeDetails = routeDetails;
         this.startLocation = startLocation;
@@ -86,11 +98,11 @@ public class Route {
         this.endLocation = endLocation;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

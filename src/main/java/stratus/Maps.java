@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.StringJoiner;
@@ -16,7 +17,7 @@ public class Maps {
      * This class takes the URL, and with the API keys will use HTTP client to get a response to form a JSON object.
      * @param url Provide the URL to to get the api JSON response from
      */
-    private static String getResponse(){//asks for a few basic information for the trip
+    public static String getResponse(){//asks for a few basic information for the trip
 
         System.out.println("Please enter the origin of your travel");
         String origin = scn.nextLine();
@@ -64,7 +65,39 @@ public class Maps {
         return PrettyJSON.print(jsonString);
     }
 
-private static String stringToTime(String string){
+    //in progress
+    /*public static Route makeRoute(String startLocation, String endLocation, String date, char transportMethod){
+       String  mode=transToMode(transportMethod);
+       String pref=transToPref();
+        //API keys from Googlemaps API docs
+        String apiKey = "AIzaSyBktdACICn5zDhtfxywVJRRUuB53aE1V-I";
+        String depTime=Maps.stringToTime(date);
+
+
+        //Creates a HTTPClient to start the query from the api
+        HttpApiResponse har =new HttpApiResponse();
+        String jsonString;
+        if((depTime=="now") && (mode=="driving")){
+            jsonString = har.getApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&mode=" + mode + "&key=" + apiKey);
+        }
+        else {
+            if((mode=="transit") && (pref==true)){
+                jsonString = har.getApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&mode=" + mode + "&departure_time" + depTime +"&transit_mode="+transit_mode+ "&key=" + apiKey);
+            }
+            else {jsonString = har.getApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&mode=" + mode + "&departure_time" + depTime + "&key=" + apiKey);
+            }
+        }
+        String startLongitude= ;
+        String startLatitude= ;
+
+        String endLongitude= ;
+        String endLatitude= ;
+        String pJ=PrettyJSON.print(jsonString);
+        return(Route(pJ, startLocation, endLocation, date, transportMethod, startLongitude, startLatitude,endLongitude, String endLatitude,
+                String currency, String locationName, List<User> user));
+    }*/
+
+public static String stringToTime(String string){
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm");
     try {Date dt = sdf.parse(string);
     long epoch = dt.getTime();
