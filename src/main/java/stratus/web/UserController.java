@@ -4,11 +4,13 @@ package stratus.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import stratus.User;
-import stratus.UserDAO;
+import stratus.DAO.User;
+import stratus.DAO.UserDAO;
 
 import java.util.List;
 
+// Different routes specified using the @RequestMapping notation, GET requests can be done by visiting the URL as a user
+// Browsers are incapble of POST and DELETE requests therefore a http request is required.
 @RestController
 public class UserController {
 
@@ -21,9 +23,16 @@ public class UserController {
 
     }
 
+    @GetMapping("/users/restrict")
+    public List<User> getSecureUsers() {
+        return userDAO.getAllUsers();
+
+    }
+
     @PostMapping("/users")
     @ResponseStatus(HttpStatus.CREATED)
     User newUser(@RequestBody User newUser) {
+        newUser.encryptPassword(newUser.getPassword());
         userDAO.insertUser(newUser);
         return newUser;
     }

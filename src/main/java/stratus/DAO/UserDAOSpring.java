@@ -1,7 +1,6 @@
-package stratus;
+package stratus.DAO;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import stratus.data.UserRepository;
 
 import java.util.ArrayList;
@@ -56,7 +55,6 @@ public class UserDAOSpring implements UserDAO {
         User u;
         u = userRepository.findByLogin(login);
         return u;
-
     }
 
 
@@ -66,6 +64,16 @@ public class UserDAOSpring implements UserDAO {
         return userRepository.findById(id).get();
     }
 
+    // update method - NEEDS WORK! currently overwrites all data instead of updating individual fields
+    public boolean update(User user) {
+        for (User u : getAllUsers()) {
+            if (u.getId() == user.getId()) {
+                userRepository.save(user);
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 }

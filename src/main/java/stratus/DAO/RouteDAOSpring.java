@@ -1,4 +1,4 @@
-package stratus;
+package stratus.DAO;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

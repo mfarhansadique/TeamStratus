@@ -1,4 +1,4 @@
-package stratus;
+package stratus.API;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;

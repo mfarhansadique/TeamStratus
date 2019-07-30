@@ -1,4 +1,4 @@
-package stratus;
+package stratus.API;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

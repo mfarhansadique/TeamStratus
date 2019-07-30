@@ -1,4 +1,5 @@
-package stratus;
+package stratus.API;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

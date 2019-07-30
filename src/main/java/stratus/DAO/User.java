@@ -1,4 +1,7 @@
-package stratus;
+package stratus.DAO;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import stratus.DAO.Route;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,12 +24,13 @@ public class User {
     private String password;
     private String email;
     private String telephoneNumber;
-    private char role;
+    private String role;
+    private String photo;
 
 //    cascade = {CascadeType.PERSIST, CascadeType.MERGE},
 
     @ManyToMany (fetch= FetchType.EAGER,mappedBy = "user")
-    private List<Route> route = new ArrayList<>();; //make sure that user adds the routes to themselves
+    private List<Route> route = new ArrayList<>(); //make sure that user adds the routes to themselves
 
     public String getTelephoneNumber() {
         return telephoneNumber;
@@ -36,9 +40,7 @@ public class User {
         this.telephoneNumber = telephoneNumber;
     }
 
-    public User(String firstName, String lastName, String address, String city, String postCode, String login,
-                String password, String email, String telephoneNumber, char role, List<Route> route) {
-//        this.id = id;
+    public User(String firstName, String lastName, String address, String city, String postCode, String login, String password, String email, String telephoneNumber, String role, String photo, List<Route> route) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -49,6 +51,7 @@ public class User {
         this.email = email;
         this.telephoneNumber = telephoneNumber;
         this.role = role;
+        this.photo = photo;
         this.route = route;
     }
 
@@ -134,11 +137,26 @@ public class User {
         this.route = route;
     }
 
-    public char getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(char role) {
+    public void setRole(String role) {
         this.role = role;
     }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public void encryptPassword(String password){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        this.password = encoder.encode(password);
+    }
 }
+
+

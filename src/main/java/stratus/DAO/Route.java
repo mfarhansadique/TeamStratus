@@ -1,4 +1,4 @@
-package stratus;
+package stratus.DAO;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -15,7 +15,7 @@ public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String routeDetails;// will store
+    private String routeDetails;//holds json data
     private String startLocation;
     private String endLocation;
     private String date; //format: "yyyy-MM-dd 'at' HH:mm"
