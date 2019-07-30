@@ -16,10 +16,10 @@ public class GYWUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    //Responsible for logging in and getting the logged in user's role
     @Override
     public UserDetails loadUserByUsername(String login) {
         User user = userRepository.findByLogin(login);
-        System.out.println(user.getRole());
 
         if (user == null) {
             throw new UsernameNotFoundException(login);
@@ -27,11 +27,13 @@ public class GYWUserDetailsService implements UserDetailsService {
 
         System.out.println("login successful for user = " + login);
 
+        //Returns the role of the user as a GrantedAuthority object which the security framework can use
         UserDetails ud = new UserDetails() {
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
                 GrantedAuthority ga = new GrantedAuthority() {
                     @Override
+                    //Obtains the role in string form
                     public String getAuthority() {
                         return user.getRole();}
                 };
