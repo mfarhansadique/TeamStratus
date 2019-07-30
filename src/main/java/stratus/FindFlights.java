@@ -1,4 +1,6 @@
 package stratus;
+import org.json.JSONObject;
+
 import java.util.Scanner;
 
 public class FindFlights {
@@ -13,11 +15,13 @@ public class FindFlights {
      * This method uses Scanner and System in to get inputs to perform a location query which will print a JSON Object
      * containing all the corresponding Airports associated with the string using the getResponse method.
      */
-    private static void printLocationData(HttpApiResponse resP){
-        System.out.println("Please enter a location");
-        String localInput = scn.next();
+    public static JSONObject printLocationData(HttpApiResponse resP, String localInput){
+       // System.out.println("Please enter a location");
+       // String localInput = scn.next();
         String url = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/GBP/en-GB/?query="+localInput;
-        System.out.println(resP.getRapidApiResponse(url));
+        JSONObject objToReturn = new JSONObject(resP.getRapidApiResponse(url));
+        objToReturn.getJSONArray("places");
+        return objToReturn;
     }
     /**
      * This method uses Scanner and System in to get inputs to perform a quotes for flights search which will print a
@@ -46,17 +50,17 @@ public class FindFlights {
         String input = scn.next();
         input = input.toLowerCase();
 
-        if (input.equals("1")){
-            printLocationData(resP);
-            chooseInput(resP);
-        } else if (input.equals("2")){
-            printQuoteData(resP);
-            chooseInput(resP);
-        } else if (input.equals("x")){
-            scn.close();
-        } else {
-            chooseInput(resP);
-        }
+//        if (input.equals("1")){
+//            printLocationData(resP);
+//            chooseInput(resP);
+//        } else if (input.equals("2")){
+//            printQuoteData(resP);
+//            chooseInput(resP);
+//        } else if (input.equals("x")){
+//            scn.close();
+//        } else {
+//            chooseInput(resP);
+//        }
 
     }
 
