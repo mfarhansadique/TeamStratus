@@ -70,7 +70,7 @@ public class Maps {
     public static Route makeRoute(String startLocation, String endLocation, String date, char transportMethod){
        String  mode=transToMode(transportMethod);
        String transit_mode=transToTM(transportMethod);
-       boolean pref=transToPref(transportMethod);
+
         //API keys from Googlemaps API docs
         String apiKey = "AIzaSyBktdACICn5zDhtfxywVJRRUuB53aE1V-I";
         String depTime=Maps.stringToTime(date);
@@ -83,7 +83,7 @@ public class Maps {
             jsonString = har.getApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + startLocation+ "&destination=" + endLocation + "&mode=" + mode + "&key=" + apiKey);
         }
         else {
-            if((mode=="transit") && (pref==true)){
+            if((mode=="transit") && (transit_mode!="")){
                 jsonString = har.getApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + startLocation + "&destination=" + endLocation + "&mode=" + mode + "&departure_time" + depTime +"&transit_mode="+transit_mode+ "&key=" + apiKey);
             }
             else {jsonString = har.getApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + startLocation + "&destination=" + endLocation + "&mode=" + mode + "&departure_time" + depTime + "&key=" + apiKey);
@@ -111,6 +111,44 @@ public static String stringToTime(String string){
     catch(ParseException e){return "now";}
 
 }
+
+public static String transToMode(char method){
+        switch(method) {
+            case'w':
+                return"walking";
+            case'd':
+                return"driving";
+            case'b':
+                return "bicycling";
+            case't':
+            case'u':
+            case's':
+            case'r':
+            case'a':
+            case'i':
+                return"transit";
+        }
+    return "";
+}
+
+    public static String transToTM(char method){
+        String metho=Character.toString(method);
+        switch(metho) {
+            case "u":
+                return"bus";
+            case "s":
+                return "subway";
+            case "r":
+                return"train";
+            case "a":
+                return "tram";
+            case "i":
+                return "rail";
+        }
+        return"";
+
+    }
+
 
 
 public static void dataFromAPI(String string){//chose to return the duration and distance of the trip as an example
