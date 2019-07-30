@@ -1,42 +1,46 @@
-package stratus;
+package stratus.DAO;
 
-import org.springframework.data.annotation.Id;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import stratus.DAO.Route;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity @Table(name="user")
 public class User {
 
-    @Id @GeneratedValue
-
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String firstName;
     private String lastName;
     private String address;
     private String city;
     private String postCode;
+
+    @Column(unique = true)
     private String login;
     private String password;
     private String email;
-    private int telephoneNumber;
+    private String telephoneNumber;
+    private String role;
+    private String photo;
 
-    @ManyToMany
-    private List<Route> routes; //make sure that user adds the routes to themselves
+//    cascade = {CascadeType.PERSIST, CascadeType.MERGE},
 
-    public int getTelephoneNumber() {
+    @ManyToMany (fetch= FetchType.EAGER,mappedBy = "user")
+    private List<Route> route = new ArrayList<>(); //make sure that user adds the routes to themselves
+
+    public String getTelephoneNumber() {
         return telephoneNumber;
     }
 
-    public void setTelephoneNumber(int telephoneNumber) {
+    public void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
     }
 
-    public User(int id, String firstName, String lastName, String address, String city, String postCode, String login, String password, String email) {
-        this.id = id;
+    public User(String firstName, String lastName, String address, String city, String postCode, String login, String password, String email, String telephoneNumber, String role, String photo, List<Route> route) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -45,6 +49,10 @@ public class User {
         this.login = login;
         this.password = password;
         this.email = email;
+        this.telephoneNumber = telephoneNumber;
+        this.role = role;
+        this.photo = photo;
+        this.route = route;
     }
 
     public User() {};
@@ -121,11 +129,34 @@ public class User {
         this.email = email;
     }
 
-    public List<Route> getRoutes() {
-        return routes;
+    public List<Route> getRoute() {
+        return route;
     }
 
-    public void setRoutes(List<Route> routes) {
-        this.routes = routes;
+    public void setRoute(List<Route> routes) {
+        this.route = route;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public void encryptPassword(String password){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        this.password = encoder.encode(password);
     }
 }
+
+

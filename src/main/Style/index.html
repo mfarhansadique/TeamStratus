@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">GetYourWay</span>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="signin">Sign In</button>
+</nav>
+
+<!--<div class="topnav">-->
+<!--    <a href="#Signin">Sign in</a>-->
+<!--    <a href="#Login">Login</a>-->
+
+<!--</div>-->
+
+<div class ="container">
+<form class="w-50 mx-auto">
+    <div class="form-group>
+        <label for="departure_input">From</label>
+        <input type="departure" class="form-control" id="departure_input" aria-describedby="emailHelp" placeholder="From....">
+    </div>
+    <div class="form-group">
+        <label for="destination_input">To</label>
+        <input type="destination" class="form-control" id="destination_input" placeholder="To....">
+    </div>
+    <div class="form-check form-check-inline">
+        <input type="checkbox" class="form-check-input" id="bike_mode">
+        <label class="form-check-label" for="bike_mode">Bike</label>
+        <input type="checkbox" class="form-check-input" id="walk_mode">
+        <label class="form-check-label" for="walk_mode">Walk</label>
+        <input type="checkbox" class="form-check-input" id="publictransport_mode">
+        <label class="form-check-label" for="publictransport_mode">Public Transport</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+    <div id="map"></div>
+</div>
+<!--<script>-->
+<!--      var map;-->
+<!--      function initMap() {-->
+<!--        map = new google.maps.Map(document.getElementById('map'), {-->
+<!--          center: {lat: -34.397, lng: 150.644},-->
+<!--          zoom: 8-->
+<!--        });-->
+<!--      }-->
+<!--    </script>-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBktdACICn5zDhtfxywVJRRUuB53aE1V-I&callback=initMap"
+        async defer></script>
+
+<!--<form class="Search">-->
+<!--    <input type="text" placeholder="From"><br>-->
+<!--    <input type="text" placeholder="To">-->
+<!--    <label for="start">Start date:</label>-->
+
+<!--    <input type="date" id="start" name="trip-start"-->
+<!--           value="2018-07-22"-->
+<!--           min="2018-01-01" max="2018-12-31"><br>-->
+<!--    <form class = "Mode">-->
+<!--    <input type="radio" name="transport" value="Walk"> Walk-->
+<!--    <input type="radio" name="transport" value="Bike"> Bike-->
+<!--    <input type="radio" name="transport" value="Public"> Public-->
+<!--    <input type="radio" name="transport" value="Car"> Car-->
+<!--    <input type="radio" name="transport" value="Plane"> Plane-->
+<!--    </form>-->
+<!--</form>-->
+</div>
+<footer class="page-footer font-small blue">
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2019 Copyright:
+        <a href="https://mdbootstrap.com/education/bootstrap/"> TeamStratus</a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+
+</body>
+</html>
