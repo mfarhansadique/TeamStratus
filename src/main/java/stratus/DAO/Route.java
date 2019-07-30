@@ -36,7 +36,7 @@ public class Route {
     private List<User> user = new ArrayList<User>();
 
     //constructor for google maps
-    public Route(String routeDetails, String startLocation, String endLocation, String date, char transportMethod, String startLongitude, String startLatitude, String endLongitude, String endLatitude, String currency) {
+    public Route(String routeDetails, String startLocation, String endLocation, String date, char transportMethod, String startLongitude, String startLatitude, String endLongitude, String endLatitude, String currency, List<User>user) {
         this.routeDetails = routeDetails;
         this.startLocation = startLocation;
         this.endLocation = endLocation;
@@ -47,6 +47,7 @@ public class Route {
         this.endLongitude = endLongitude;
         this.endLatitude = endLatitude;
         this.currency = currency;
+        this.user = user;
     }
 
     public Route(String routeDetails, String startLocation, String endLocation, String date, boolean favourite,

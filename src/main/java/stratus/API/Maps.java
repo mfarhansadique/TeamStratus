@@ -99,7 +99,7 @@ public class Maps {
         String endLatitude= Coord[4];
         String currency= CurrencyAPI.currencyByCountry(getCountryCode(endLatitude,endLongitude));
         String pJ =PrettyJSON.print(jsonString);
-        return(new Route(pJ,  startLocation, endLocation,  date,  transportMethod,  startLongitude,  startLatitude,  endLongitude,  endLatitude,  currency));
+        return(new Route(pJ,  startLocation, endLocation,  date,  transportMethod,  startLongitude,  startLatitude,  endLongitude,  endLatitude,  currency, null));
     }
 
 public static String stringToTime(String string){
