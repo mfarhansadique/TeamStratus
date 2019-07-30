@@ -35,9 +35,25 @@ public class Route {
     @JoinTable (name = "user_route" , joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "route_id")})
     private List<User> user = new ArrayList<User>();
 
+<<<<<<< HEAD
+    public Route(String routeDetails, String startLocation, String endLocation, String startLongitude, String startLatitude, String endLongitude, String endLatitude,  List<User> user) {
+        this.routeDetails = routeDetails;
+        this.startLocation = startLocation;
+        this.endLocation = endLocation;
+        this.startLongitude = startLongitude;
+        this.startLatitude = startLatitude;
+        this.endLongitude = endLongitude;
+        this.endLatitude = endLatitude;
+        transportMethod = 'f';
+        this.user = user;
+    }
+
+    public Route(String startLocation, String endLocation, String date, char transportMethod) {
+=======
     //constructor for google maps
     public Route(String routeDetails, String startLocation, String endLocation, String date, char transportMethod, String startLongitude, String startLatitude, String endLongitude, String endLatitude, String currency, List<User>user) {
         this.routeDetails = routeDetails;
+>>>>>>> 0cd8cc5fe78891e76e421b4b24aa5ecf1713cf39
         this.startLocation = startLocation;
         this.endLocation = endLocation;
         this.date = date;

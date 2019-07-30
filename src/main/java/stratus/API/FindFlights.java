@@ -32,6 +32,16 @@ public class FindFlights {
         }
         return listOfAirports;
     }
+
+    public static String getLongLatofAirport(String airportCode){
+        HttpApiResponse apiCaller = new HttpApiResponse(apiKey, "airport-info.p.rapidapi.com");
+        JSONObject toGet = new JSONObject(apiCaller.getRapidApiResponse("https://airport-info.p.rapidapi.com/airport?iata="+airportCode));
+        System.out.println(airportCode);
+        System.out.println(toGet.toString());
+        String longLat = toGet.getDouble("longitude") + "," + toGet.getDouble("latitude") + ","+toGet.getString("name");
+        return longLat;
+    }
+
     /**
      * This method uses Scanner and System in to get inputs to perform a quotes for flights search which will print a
      * JSON Object containing airlines, currency info, and prices for 'to' and 'from' the location using the getResponse

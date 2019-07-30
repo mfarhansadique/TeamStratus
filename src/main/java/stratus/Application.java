@@ -36,11 +36,15 @@ public class Application {
 //                LocalDate.of(2019,07,25), true, 'B' , "Startlong",
 //                "EndLong", "Endlat", "StartLat", "GBP", "QA",
 //                Arrays.asList(userDao.findByLogin("farhan")));
-//
+
 //        routeDao.save(home);
 //
-        routeDao.save();
+
+       // routeDao.save();
       System.out.println(routeDao.findAll());
+
+        System.out.println(routeDao.findAll());
+
     }
 
 }
