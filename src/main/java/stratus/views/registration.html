@@ -11,7 +11,7 @@
 <div>
 
 
-    <form action="">
+    <form action="http://localhost:8080/users" method="post">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-sm-4">
@@ -57,13 +57,13 @@
             <div class="row justify-content-center">
                 <div class="col-sm-4">
             Password:
-            <input type="text" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" required>
+            <input type="password" name="password" pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/" required> <!--one upper case, one lower case and one number-->
                 </div></div>
             <input type="hidden" name="role" value="User">
             <div class="row justify-content-center">
                 <div class="col-sm-4">
             Upload photo:
-            <input type="file" name="photo" accept="image/*" required>
+            <input type="text" name="photo" required><!--accept="image/*"-->
                 </div></div>
             <input type="hidden" name="route" value="null">
             <div class="row justify-content-center">

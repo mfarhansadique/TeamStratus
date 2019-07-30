@@ -1,5 +1,6 @@
 package stratus.DAO;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import stratus.DAO.Route;
 
 import javax.persistence.*;
@@ -151,4 +152,11 @@ public class User {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
+
+    public void encryptPassword(String password){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        this.password = encoder.encode(password);
+    }
 }
+
+
