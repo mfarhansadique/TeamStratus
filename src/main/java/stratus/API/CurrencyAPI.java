@@ -69,6 +69,9 @@ public class CurrencyAPI {
         return map;
     }
 
+    public static String currencyByCountry(String country){
+       return countryCurrencyMap.get(country);
+    }
     private static void getCurrencyByAirportCode(String airportCode){
         JSONObject toGet = new JSONObject(apiCaller.getRapidApiResponse("https://airport-info.p.rapidapi.com/airport?iata="+airportCode));
         String countryCode = toGet.getString("country_iso");

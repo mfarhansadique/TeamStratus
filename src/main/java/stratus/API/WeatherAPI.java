@@ -21,22 +21,8 @@ public class WeatherAPI {
         return apiCaller.getRapidApiResponse("https://dark-sky.p.rapidapi.com/"+ lat +","+ lon +"?lang=en&units=auto");
 
     }
-    private static String[] breaksMapsOutput(String bigString){ //built to come after Maps.getCoordinates, returns two responses for start and finish
 
-        String[] parts = bigString.split("-");
-        String startB=parts[0];
-        String endB=parts[1];
-        String[] partS=startB.split(",");
-        String[] partE=endB.split(",");
-
-        String a= getWeatherByLatLon(partS[0],partS[1]);
-        String b= getWeatherByLatLon(partE[0],partE[1]);
-        String[] array={a,b};
-        return array;
-
-    }
-
-    private static String getWeatherByAirportCode(String airportCode){
+    public static String getWeatherByAirportCode(String airportCode){
         double lat;
         double lon;
         JSONObject toGet = new JSONObject(apiCaller2.getRapidApiResponse("https://airport-info.p.rapidapi.com/airport?iata="+airportCode));
@@ -59,7 +45,7 @@ public class WeatherAPI {
     }
 
 
-    private static String[] outputWeatherWeek(String string, int dayDiff){
+    public static String[] outputWeatherWeek(String string, int dayDiff){
         //dayDiff is the amount of days of difference between today and the day of interest plus 1. So if it is Monday and we want Tuesday we need to enter 2
         JSONObject myObjectData = new JSONObject(string);
         String[] result=new String[3];

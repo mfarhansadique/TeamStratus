@@ -2,6 +2,7 @@ package stratus.API;
 import org.json.JSONArray;
 
 import org.json.JSONObject;
+import stratus.DAO.Route;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -66,9 +67,10 @@ public class Maps {
     }
 
     //in progress
-    /*public static Route makeRoute(String startLocation, String endLocation, String date, char transportMethod){
+    public static Route makeRoute(String startLocation, String endLocation, String date, char transportMethod){
        String  mode=transToMode(transportMethod);
-       String pref=transToPref();
+       String transit_mode=transToTM(transportMethod);
+
         //API keys from Googlemaps API docs
         String apiKey = "AIzaSyBktdACICn5zDhtfxywVJRRUuB53aE1V-I";
         String depTime=Maps.stringToTime(date);
@@ -78,24 +80,27 @@ public class Maps {
         HttpApiResponse har =new HttpApiResponse();
         String jsonString;
         if((depTime=="now") && (mode=="driving")){
-            jsonString = har.getApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&mode=" + mode + "&key=" + apiKey);
+            jsonString = har.getApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + startLocation+ "&destination=" + endLocation + "&mode=" + mode + "&key=" + apiKey);
         }
         else {
-            if((mode=="transit") && (pref==true)){
-                jsonString = har.getApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&mode=" + mode + "&departure_time" + depTime +"&transit_mode="+transit_mode+ "&key=" + apiKey);
+            if((mode=="transit") && (transit_mode!="")){
+                jsonString = har.getApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + startLocation + "&destination=" + endLocation + "&mode=" + mode + "&departure_time" + depTime +"&transit_mode="+transit_mode+ "&key=" + apiKey);
             }
-            else {jsonString = har.getApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&mode=" + mode + "&departure_time" + depTime + "&key=" + apiKey);
+            else {jsonString = har.getApiResponse("https://maps.googleapis.com/maps/api/directions/json?origin=" + startLocation + "&destination=" + endLocation + "&mode=" + mode + "&departure_time" + depTime + "&key=" + apiKey);
             }
         }
-        String startLongitude= ;
-        String startLatitude= ;
 
-        String endLongitude= ;
-        String endLatitude= ;
-        String pJ=PrettyJSON.print(jsonString);
-        return(Route(pJ, startLocation, endLocation, date, transportMethod, startLongitude, startLatitude,endLongitude, String endLatitude,
-                String currency, String locationName, List<User> user));
-    }*/
+        String [] Coord= getCoordinates(jsonString);
+
+        String startLongitude= Coord[1];
+        String startLatitude=Coord[0];
+
+        String endLongitude= Coord[3];
+        String endLatitude= Coord[4];
+        String currency= CurrencyAPI.currencyByCountry(getCountryCode(endLatitude,endLongitude));
+        String pJ =PrettyJSON.print(jsonString);
+        return(new Route(pJ,  startLocation, endLocation,  date,  transportMethod,  startLongitude,  startLatitude,  endLongitude,  endLatitude,  currency, null));
+    }
 
 public static String stringToTime(String string){
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm");
@@ -106,6 +111,44 @@ public static String stringToTime(String string){
     catch(ParseException e){return "now";}
 
 }
+
+public static String transToMode(char method){
+        switch(method) {
+            case'w':
+                return"walking";
+            case'd':
+                return"driving";
+            case'b':
+                return "bicycling";
+            case't':
+            case'u':
+            case's':
+            case'r':
+            case'a':
+            case'i':
+                return"transit";
+        }
+    return "";
+}
+
+    public static String transToTM(char method){
+        String metho=Character.toString(method);
+        switch(metho) {
+            case "u":
+                return"bus";
+            case "s":
+                return "subway";
+            case "r":
+                return"train";
+            case "a":
+                return "tram";
+            case "i":
+                return "rail";
+        }
+        return"";
+
+    }
+
 
 
 public static void dataFromAPI(String string){//chose to return the duration and distance of the trip as an example
@@ -123,7 +166,7 @@ public static void dataFromAPI(String string){//chose to return the duration and
 
 }
 
-public static String getCoordinates(String string){ //method that can be added to get the coordinates for the weather
+public static String[] getCoordinates(String string){ //method that can be added to get the coordinates for the weather
     JSONObject myObjectData = new JSONObject(string);
     JSONArray routes = myObjectData.getJSONArray("routes");
     JSONObject routes1 = routes.getJSONObject(0);
@@ -133,13 +176,15 @@ public static String getCoordinates(String string){ //method that can be added t
     JSONObject startPlace=trip.getJSONObject("start_location");
     StringJoiner latLong= new StringJoiner(" ");
 
-    latLong.add(startPlace.getString("lat")+",");
-    latLong.add(startPlace.getString("lng"));
-    latLong.add("-");
-    latLong.add(endPlace.getString("lat")+",");
-    latLong.add(endPlace.getString("lng"));
+    String a= startPlace.getString("lat");
+    String b= startPlace.getString("lng");
 
-    return latLong.toString();
+    String c= endPlace.getString("lat");
+    String d=endPlace.getString("lng");
+
+    String[] result=new String[]{a,b,c,d};
+
+    return result;
 
 
 //would be great to find something else that doesn't use Google Maps for prices concerns
