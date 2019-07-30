@@ -9,6 +9,8 @@ import stratus.UserDAO;
 
 import java.util.List;
 
+// Different routes specified using the @RequestMapping notation, GET requests can be done by visiting the URL as a user
+// Browsers are incapble of POST and DELETE requests therefore a http request is required.
 @RestController
 public class UserController {
 
