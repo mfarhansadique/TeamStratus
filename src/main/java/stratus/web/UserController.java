@@ -29,9 +29,10 @@ public class UserController {
 
     }
 
-    @PostMapping("/users")
+
+    @PostMapping("/users/register")
     @ResponseStatus(HttpStatus.CREATED)
-    User newUser(@RequestBody User newUser) {
+    User newUser(@ModelAttribute User newUser) {
         newUser.encryptPassword(newUser.getPassword());
         userDAO.insertUser(newUser);
         return newUser;
