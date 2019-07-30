@@ -12,7 +12,7 @@
 
 <nav class="navbar navbar-dark bg-dark">
     <span class="navbar-brand mb-0 h1">GetYourWay</span>
-    <button class="btn btn-outline-success my-2 my-sm-0" type="signin">Sign In</button>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="register">Register</button>
 </nav>
 
 <!--<div class="topnav">-->
@@ -31,6 +31,9 @@
         <label for="destination_input">To</label>
         <input type="destination" class="form-control" id="destination_input" placeholder="To....">
     </div>
+    <div class="form-group">
+    <input placeholder="Selected date" type="text" id="date-picker-example" class="form-control datepicker">
+    </div>
     <div class="form-check form-check-inline">
         <input type="checkbox" class="form-check-input" id="bike_mode">
         <label class="form-check-label" for="bike_mode">Bike</label>
@@ -39,41 +42,41 @@
         <input type="checkbox" class="form-check-input" id="publictransport_mode">
         <label class="form-check-label" for="publictransport_mode">Public Transport</label>
     </div>
+
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
-<div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
-    <div id="map"></div>
+<div class="card-group">
+    <div class="card">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Location</h5>
+            <p class="card-text">Temperature</p>
+        </div>
+    </div>
+    <div class="card">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Location</h5>
+            <p class="card-text">Temperature</p>
+        </div>
+    </div>
+    <div class="card">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Location</h5>
+            <p class="card-text">Temperature</p>
+        </div>
+    </div>
 </div>
-<!--<script>-->
-<!--      var map;-->
-<!--      function initMap() {-->
-<!--        map = new google.maps.Map(document.getElementById('map'), {-->
-<!--          center: {lat: -34.397, lng: 150.644},-->
-<!--          zoom: 8-->
-<!--        });-->
-<!--      }-->
-<!--    </script>-->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBktdACICn5zDhtfxywVJRRUuB53aE1V-I&callback=initMap"
-        async defer></script>
 
-<!--<form class="Search">-->
-<!--    <input type="text" placeholder="From"><br>-->
-<!--    <input type="text" placeholder="To">-->
-<!--    <label for="start">Start date:</label>-->
 
-<!--    <input type="date" id="start" name="trip-start"-->
-<!--           value="2018-07-22"-->
-<!--           min="2018-01-01" max="2018-12-31"><br>-->
-<!--    <form class = "Mode">-->
-<!--    <input type="radio" name="transport" value="Walk"> Walk-->
-<!--    <input type="radio" name="transport" value="Bike"> Bike-->
-<!--    <input type="radio" name="transport" value="Public"> Public-->
-<!--    <input type="radio" name="transport" value="Car"> Car-->
-<!--    <input type="radio" name="transport" value="Plane"> Plane-->
-<!--    </form>-->
-<!--</form>-->
-</div>
+<!--<div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">-->
+<!--    <div id="map"></div>-->
+<!--</div>-->
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBktdACICn5zDhtfxywVJRRUuB53aE1V-I&callback=initMap"-->
+<!--        async defer></script>-->
+<!--</div>-->
 <footer class="page-footer font-small blue">
 
     <!-- Copyright -->
