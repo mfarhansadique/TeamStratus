@@ -100,10 +100,12 @@ public class Maps {
         String endLongitude= Coord[2];
         String endLatitude= Coord[3];
         String currency= CurrencyAPI.currencyByCountry(getCountryCode(endLatitude,endLongitude));
-        String pJ =PrettyJSON.print(jsonString);
         Date dateAPI= googleDateToDate(date);
-        return(new Route(pJ,  startLocation, endLocation,  dateAPI,  false, transportMethod,  startLongitude,  startLatitude,  endLongitude,  endLatitude,  currency, null, null));
+        String details=dataFromAPI(jsonString);
+        return(new Route(details,  startLocation, endLocation,  dateAPI,  false, transportMethod,  startLongitude,  startLatitude,  endLongitude,  endLatitude,  currency, null, null));
     }
+
+
 
 public static String stringToTime(String string){
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm");
@@ -166,7 +168,7 @@ public static String transToMode(char method){
 
 
 //For front end
-public static void dataFromAPI(String string){ //returns number of routes, distance and duration for each of them
+public static String dataFromAPI(String string){ //returns number of routes, distance and duration for each of them
     JSONObject myObjectData = new JSONObject(string);
     JSONArray routes = myObjectData.getJSONArray("routes");
     System.out.println("There are "+routes.length()+" route(s).");
@@ -176,8 +178,10 @@ public static void dataFromAPI(String string){ //returns number of routes, dista
         JSONObject trip=legs.getJSONObject(0);
         String duration= trip.getJSONObject("duration").getString("text");
         String distance= trip.getJSONObject("distance").getString("text");
-        System.out.println("duration:"+duration+"\tdistance:"+distance);
+        String a=duration+","+distance+","+Integer.toString(routes.length());
+        return a;
     }
+    return("");
 
 }
 
