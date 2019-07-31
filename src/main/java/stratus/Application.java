@@ -39,7 +39,7 @@ public class Application {
 
 //        routeDao.save(home);
 //
-        System.out.println(routeDao.findAll());
+        //System.out.println(routeDao.findAll());
     }
 
 }

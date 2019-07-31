@@ -2,13 +2,11 @@ package stratus.web;
 
 import com.google.gson.Gson;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import stratus.API.AirportInformation;
 import stratus.API.HttpApiResponse;
-import stratus.AirportInformation;
-import stratus.AmadeusFlightsApi;
-import stratus.DAO.RouteDAO;
+import stratus.API.AmadeusFlightsApi;
+
 
 import java.util.List;
 
@@ -28,15 +26,12 @@ public class ApiController {
      return json;
  }
 
- @GetMapping("/getFlight")
+ @GetMapping("/getflight/{destinationcode}/{arrivalcode}/{destinationdate}")
  @ResponseBody
- public ModelAndView getFlight(@RequestParam String destinationcode, @RequestParam String arrivalcode, @RequestParam String destinationdate){
-  ModelAndView mv = new ModelAndView();
+ public String getFlight(@PathVariable("destinationcode") String destinationcode, @PathVariable("arrivalcode") String arrivalcode, @PathVariable("destinationdate") String destinationdate){
   JSONObject flights = AmadeusFlightsApi.getFlightInfo(arrivalcode,destinationcode,destinationdate);
   String json = flights.toString();
-  System.out.println(json);
-  mv.addObject(json);
-  return mv;
+  return json;
  }
 
 
