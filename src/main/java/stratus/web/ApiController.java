@@ -9,6 +9,7 @@ import stratus.DAO.Route;
 import stratus.DAO.RouteDAO;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -33,13 +34,16 @@ RouteDAO route;
  @GetMapping("/getflight/{destinationcode}/{arrivalcode}/{destinationdate}")
  @ResponseBody
  public String getFlight(@PathVariable("destinationcode") String destinationcode, @PathVariable("arrivalcode") String arrivalcode, @PathVariable("destinationdate") String destinationdate){
-  JSONObject flights = AmadeusFlightsApi.getFlightInfo(arrivalcode,destinationcode,destinationdate);
+  ArrayList flights = AmadeusFlightsApi.getFlightInfo(arrivalcode,destinationcode,destinationdate);
   String destinationWeather = WeatherAPI.getWeatherByAirportCode(destinationcode);
   String arrivalWeather = WeatherAPI.getWeatherByAirportCode(arrivalcode);
   String createWeatherJson = "{\"destinationWeather\":"+destinationWeather + ",\"arrivalWeather\":"+arrivalWeather+"}";
-  String json = flights.toString();
-  route.save(new Route(json,json,json,json,json,json,json,null));
-
+  String json = flights.get(0).toString();
+  /*public Route(String routeDetails, String startLocation, String endLocation, String date, boolean favourite,
+     char transportMethod, String startLongitude, String startLatitude, String endLongitude, String endLatitude,
+             String currency, String locationName, List<User> user) {*/
+  //route.save(new Route(json,flights.get(3),flights.get(6),destinationdate,false,'f',flights.get(4),flights.get(5)));
+     System.out.println(route.findAll());
   //json =  json + "," + createWeatherJson ;
   return json;
  }
