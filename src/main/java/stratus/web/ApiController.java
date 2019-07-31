@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import stratus.API.AirportInformation;
 import stratus.API.HttpApiResponse;
 import stratus.API.AmadeusFlightsApi;
+import stratus.API.WeatherAPI;
 
 
 import java.util.List;
@@ -30,7 +31,11 @@ public class ApiController {
  @ResponseBody
  public String getFlight(@PathVariable("destinationcode") String destinationcode, @PathVariable("arrivalcode") String arrivalcode, @PathVariable("destinationdate") String destinationdate){
   JSONObject flights = AmadeusFlightsApi.getFlightInfo(arrivalcode,destinationcode,destinationdate);
+  String destinationWeather = WeatherAPI.getWeatherByAirportCode(destinationcode);
+  String arrivalWeather = WeatherAPI.getWeatherByAirportCode(arrivalcode);
+  String createWeatherJson = "{\"destinationWeather\":"+destinationWeather + ",\"arrivalWeather\":"+arrivalWeather+"}";
   String json = flights.toString();
+  //json =  json + "," + createWeatherJson ;
   return json;
  }
 
