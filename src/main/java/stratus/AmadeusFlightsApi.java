@@ -7,13 +7,17 @@ import com.amadeus.resources.FlightOffer;
 import com.google.gson.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import stratus.API.FindFlights;
 import stratus.DAO.Route;
+import stratus.DAO.RouteDAO;
 
 
 public class AmadeusFlightsApi {
 
 
+    @Autowired
+    static RouteDAO route;
 
     public static JSONObject getFlightInfo(String originAirport,String destinationAirport,String departureDate){
         Amadeus amadeus = Amadeus.builder("4RbapAA123sW9QVA0PDHwnRkA9LVWO4u", "IIBYdRnZoRnVNED7").build();
@@ -31,7 +35,8 @@ public class AmadeusFlightsApi {
                  ) {
                 System.out.println(info);
             }
-            new Route(toReturn.toString(),originInfo[2],destinationInfo[2],originInfo[0],originInfo[1],destinationInfo[0],destinationInfo[1],null);
+            //new Route(toReturn.toString(),originInfo[2],destinationInfo[2],originInfo[0],originInfo[1],destinationInfo[0],destinationInfo[1],null);
+            route.save(new Route(toReturn.toString(),originInfo[2],destinationInfo[2],originInfo[0],originInfo[1],destinationInfo[0],destinationInfo[1],null));
 //            Gson gson2 = new GsonBuilder().setPrettyPrinting().create();
 //            JsonParser jp = new JsonParser();
 //            JsonElement je = jp.parse(jo2.toString());

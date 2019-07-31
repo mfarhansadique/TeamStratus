@@ -33,7 +33,7 @@ public class Application {
 //        System.out.println(userDao.findAll());
 //
 //        Route home = new Route("jsonString", "Happy Street", "International House",
-//                LocalDate.of(2019,07,25), true, 'B' , "Startlong",
+//                LocalDate.of(2019,07,25), true, 'B' , "S:tartlong",
 //                "EndLong", "Endlat", "StartLat", "GBP", "QA",
 //                Arrays.asList(userDao.findByLogin("farhan")));
 
