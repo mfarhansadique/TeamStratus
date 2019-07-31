@@ -2,12 +2,13 @@ package stratus.API;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import stratus.DAO.Route;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class WeatherAPI {
-//Ignore
+
 
     private static Scanner scn;
 
@@ -17,22 +18,15 @@ public class WeatherAPI {
     private static HttpApiResponse apiCaller = new HttpApiResponse(apiKey,host);
     private static HttpApiResponse apiCaller2 = new HttpApiResponse(apiKey,host2);
 
+    //   TO GET THE WEATHER FOR TODAY OR THIS WEEK
+
     private static String getWeatherByLatLon(String lat, String lon){
         return apiCaller.getRapidApiResponse("https://dark-sky.p.rapidapi.com/"+ lat +","+ lon +"?lang=en&units=auto");
 
     }
 
-    public static String getWeatherByAirportCode(String airportCode){
-        double lat;
-        double lon;
-        JSONObject toGet = new JSONObject(apiCaller2.getRapidApiResponse("https://airport-info.p.rapidapi.com/airport?iata="+airportCode));
-        lat = toGet.getDouble("latitude");
-        lon = toGet.getDouble("longitude");
-        getWeatherByLatLon(Double.toString(lat),Double.toString(lon));
-        return getWeatherByLatLon(Double.toString(lat),Double.toString(lon));
-    }
-
-    private static String[] outputWeatherNow(String string){
+    private static String[] outputWeatherNow(Route route){
+        String string=getWeatherByLatLon(route.getEndLatitude(),route.getEndLongitude());
         JSONObject myObjectData = new JSONObject(string);
         Float temp= myObjectData.getJSONObject("currently").getFloat("temperature");
 
@@ -45,8 +39,10 @@ public class WeatherAPI {
     }
 
 
-    public static String[] outputWeatherWeek(String string, int dayDiff){
+
+    public static String[] outputWeatherWeek(Route route, int dayDiff){
         //dayDiff is the amount of days of difference between today and the day of interest plus 1. So if it is Monday and we want Tuesday we need to enter 2
+        String string=getWeatherByLatLon(route.getEndLatitude(),route.getEndLongitude());
         JSONObject myObjectData = new JSONObject(string);
         String[] result=new String[3];
 
@@ -54,12 +50,16 @@ public class WeatherAPI {
             Float temp =myObjectData.getJSONObject("daily").getJSONArray("data").getJSONObject(dayDiff).getFloat("temperature");
             result[0]=temp.toString();
             result[1]=myObjectData.getJSONObject("daily").getJSONArray("data").getJSONObject(dayDiff).getString("icon");
-             result[2]=myObjectData.getJSONObject("daily").getJSONArray("data").getJSONObject(dayDiff).getString("summary");
+            result[2]=myObjectData.getJSONObject("daily").getJSONArray("data").getJSONObject(dayDiff).getString("summary");
 
-        return result;
+            return result;
         }
         return result;
     }
+
+//    WEATHER FOR A PAST DATE
+
+
 
     private static String outputWeatherPast(String lat, String lon, String time){
 //time can be UNIX or [YYYY]-[MM]-[DD]T[HH]:[MM]:[SS][timezone]
@@ -69,9 +69,23 @@ public class WeatherAPI {
         return summary;
     }
 
+
+    //BY AIRPORT CODE
+
+    public static String getWeatherByAirportCode(String airportCode){
+        double lat;
+        double lon;
+        JSONObject toGet = new JSONObject(apiCaller2.getRapidApiResponse("https://airport-info.p.rapidapi.com/airport?iata="+airportCode));
+        lat = toGet.getDouble("latitude");
+        lon = toGet.getDouble("longitude");
+        getWeatherByLatLon(Double.toString(lat),Double.toString(lon));
+        return getWeatherByLatLon(Double.toString(lat),Double.toString(lon));
+    }
+
+
     public static void main(String[] args) {
-        scn = new Scanner(System.in);
-        System.out.println(PrettyJSON.print(getWeatherByLatLon("51.89381100000001","-0.2873046")));
+        //scn = new Scanner(System.in);
+        //System.out.println(PrettyJSON.print(getWeatherByLatLon("51.89381100000001","-0.2873046")));
         //System.out.println(Arrays.toString(outputWeatherNow(getWeatherByLatLon("51.89381100000001","-0.2873046"))));
 
     }
