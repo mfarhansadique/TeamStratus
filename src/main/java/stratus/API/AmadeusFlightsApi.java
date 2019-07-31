@@ -24,6 +24,10 @@ public class AmadeusFlightsApi {
             FlightOffer[] flightOffers = amadeus.shopping.flightOffers
                     .get(Params.with("origin", originAirport).and("destination", destinationAirport).and("departureDate", departureDate).and("max", "1"));
             JsonObject gson = flightOffers[0].getResponse().getResult();
+            for (int i = 0; i < flightOffers[0].getOfferItems().length; i++) {
+                System.out.println(flightOffers[0].getOfferItems()[i].getServices()[i].getSegments()[i].getFlightSegment().getDeparture());
+            }
+            System.out.println(flightOffers[0].getOfferItems().toString());
             toReturn = new JSONObject(gson.toString());
             String longLatOrigin = AirportInformation.getLongLatofAirport(originAirport);
             String longLatDestination = AirportInformation.getLongLatofAirport(destinationAirport);
