@@ -6,8 +6,8 @@ import RegistrationForm from './RegistrationForm.jsx';
 function App() {
   return (
     <div className="App">
-      <Navbar/>
-//      <RegistrationForm/>
+      <Navbar />
+      <RegistrationForm/>
     </div>
   );
 }
