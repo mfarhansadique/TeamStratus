@@ -6,6 +6,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import stratus.DAO.Route;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -22,8 +23,15 @@ public class CurrencyAPI {
     private static HttpApiResponse apiCaller = new HttpApiResponse(apiKey, host);
     private static Map<String,String> countryCurrencyMap = getCountryCode();
 
+    public static void setCurrency(Route route){
+        if(route.getCurrency().equals("")){
+            route.setCurrency(currencyByCountry(Maps.getCountryCode(route.getEndLatitude(),route.getEndLongitude())));
+        }
 
-    private static String getRate()  {
+    }
+
+
+    public static String getRate()  {
 
 
         String endpoint = "latest";

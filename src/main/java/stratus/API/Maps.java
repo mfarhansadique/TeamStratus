@@ -13,12 +13,12 @@ import java.util.StringJoiner;
 
 public class Maps {
 
-    private static Scanner scn;
+    //private static Scanner scn;
     /*
      * This class takes the URL, and with the API keys will use HTTP client to get a response to form a JSON object.
      * @param url Provide the URL to to get the api JSON response from
      */
-    public static String getResponse(){//asks for a few basic information for the trip
+    /*public static String getResponse(){//asks for a few basic information for the trip
 
         System.out.println("Please enter the origin of your travel");
         String origin = scn.nextLine();
@@ -64,9 +64,9 @@ public class Maps {
         }
         }
         return PrettyJSON.print(jsonString);
-    }
+    }*/
 
-    //in progress
+
     public static Route makeRoute(String startLocation, String endLocation, String date, char transportMethod){
        String  mode=transToMode(transportMethod);
        String transit_mode=transToTM(transportMethod);
@@ -150,8 +150,8 @@ public static String transToMode(char method){
     }
 
 
-
-public static void dataFromAPI(String string){//chose to return the duration and distance of the trip as an example
+//For front end
+public static void dataFromAPI(String string){ //returns number of routes, distance and duration for each of them
     JSONObject myObjectData = new JSONObject(string);
     JSONArray routes = myObjectData.getJSONArray("routes");
     System.out.println("There are "+routes.length()+" route(s).");
@@ -207,13 +207,13 @@ public static String getCountryCode(String lat, String lng) {
 
 
     }
-    return "GBP";
+    return "GB";
 }
 
     public static void main(String[] args) {
-        scn = new Scanner(System.in);
+        /*scn = new Scanner(System.in);
         String string= getResponse();
-        dataFromAPI(string);
+        dataFromAPI(string);*/
 
 
     }
