@@ -63,7 +63,7 @@ public class CurrencyAPI {
         BufferedReader br = null;
         TreeMap<String,String> map = new TreeMap<String, String>();
         try {
-            br = new BufferedReader(new FileReader("/Users/nal33/IdeaProjects/TeamStratusCurrent/src/main/java/stratus/tableconvert_2019-07-25_154141.csv"));
+            br = new BufferedReader(new FileReader("src/main/resources/tableconvert_2019-07-26_154619.csv"));
             String line =  null;
             while((line=br.readLine())!=null){
                 String arr[] = line.split(",");
