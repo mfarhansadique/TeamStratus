@@ -35,8 +35,8 @@ this.handleResponse = this.handleResponse.bind(this);
                                 email: this.state.email,
                                 login: this.state.login,
                                 password: this.state.password,
-                                role: "User",
-                                route: "",
+                                role: "U",
+                                route: null,
                                 photo: ""
                             });
             let response = await fetch("http://localhost:8080/users/register", {
