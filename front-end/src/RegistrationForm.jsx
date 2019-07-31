@@ -1,8 +1,21 @@
 import React from 'react';
-const RegistrationForm = () => {
+
+class RegistrationForm extends React.Component {
+    constructor(){
+        super();
+        }
+
+        this.handleSubmit = (event) => {
+        event.preventDefault();
+        let response = await fetch("http://localhost:8080/users/register");
+
+
+        }
+
+    render() {
                  return(
 
-                        <form action="http://localhost:8080/users/register" method="post">
+                        <form onSubmit={this.handleSubmit} method="post">
                             <div class="container">
                                 <div class="row justify-content-center">
                                     <div class="col-sm-4">
@@ -67,5 +80,7 @@ const RegistrationForm = () => {
 
                         </form>
 
-                 )};
+                 )
+     }
+};
                 export default RegistrationForm;
