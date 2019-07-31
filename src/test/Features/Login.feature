@@ -7,3 +7,10 @@ Feature: LoginFeature
     And I enter the correct Password
     And I click the submit
     Then i should be logged in
+
+    Scenario: User cannot login with incorrect Username
+      Given I navigate to the login page
+      When I enter the incorrect username
+      And I enter the correct Password
+      And I click the submit
+      Then i should be logged in
