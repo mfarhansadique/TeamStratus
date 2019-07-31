@@ -3,11 +3,13 @@ import org.json.JSONArray;
 
 import org.json.JSONObject;
 import stratus.DAO.Route;
+import stratus.DAO.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 import java.util.StringJoiner;
 
@@ -99,7 +101,7 @@ public class Maps {
         String endLatitude= Coord[4];
         String currency= CurrencyAPI.currencyByCountry(getCountryCode(endLatitude,endLongitude));
         String pJ =PrettyJSON.print(jsonString);
-        return(new Route(pJ,  startLocation, endLocation,  date,  transportMethod,  startLongitude,  startLatitude,  endLongitude,  endLatitude,  currency, null));
+        return(new Route(pJ,  startLocation, endLocation,  date,  false, transportMethod,  startLongitude,  startLatitude,  endLongitude,  endLatitude,  currency, null, null));
     }
 
 public static String stringToTime(String string){

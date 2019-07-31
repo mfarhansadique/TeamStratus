@@ -4,10 +4,7 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import stratus.API.AirportInformation;
-import stratus.API.HttpApiResponse;
-import stratus.API.AmadeusFlightsApi;
-import stratus.API.WeatherAPI;
+import stratus.API.*;
 import stratus.DAO.Route;
 import stratus.DAO.RouteDAO;
 
@@ -32,7 +29,7 @@ RouteDAO route;
      return json;
  }
 
- //ignore
+
 
  @GetMapping("/getflight/{destinationcode}/{arrivalcode}/{destinationdate}")
  @ResponseBody
@@ -49,6 +46,14 @@ RouteDAO route;
      System.out.println(route.findAll());
   //json =  json + "," + createWeatherJson ;
   return json;
+ }
+
+ @GetMapping("/getmaps/{start}/{destination}/{date}/{transportMethod}")//url
+ @ResponseBody
+public String getRouteFromFlight(@PathVariable("start") String start, @PathVariable("destination") String destination, @PathVariable("date")String date, @PathVariable("transportMethod")char transportMethod){
+  Route routeMaps=Maps.makeRoute(start, destination, date,transportMethod);
+  route.save( routeMaps );
+  return routeMaps.getRouteDetails();
  }
 
 
