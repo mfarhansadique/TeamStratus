@@ -1,7 +1,5 @@
-// import React from "react";
 import React, { Component } from "react";
 import DatePicker from "react-datepicker";
-// import moment = require("moment");
 import moment from "moment";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -11,54 +9,59 @@ class SearchBar extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { to: "", from: "" };
-
-    this.startDateHandleChange = this.startDateHandleChange.bind(this);
-    this.endDateHandleChange = this.EndDateHandleChange.bind(this);
+    this.state = {
+      to: "",
+      startDate: "",
+      from: "",
+      endDate: ""
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
-
-    this.fromHandleChange = event => {
-      this.setState({ from: event.target.value });
-    };
-    this.toHandleChange = event => {
-      this.setState({ to: event.target.value });
-    };
+    this.handleChange = this.handleChange.bind(this);
+    // this.handleResponse = this.handleResponse.bind(this);
   }
-  handleChange(date) {
-    this.setState({
-      startDate: date
+
+  async handleSubmit(event) {
+    event.preventDefault();
+    let json = JSON.stringify({
+      to: this.state.to,
+      startDate: this.state.startDate,
+      from: this.state.from,
+      endDate: this.state.endDate
     });
+    console.log(json);
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    let to = this.state.to;
-    let from = this.state.from;
-    let main = this.state.startDate;
-    console.log({ main });
-    console.log({ to });
-    console.log({ from });
-  }
+  handleChange = valueName => {
+    return event => {
+      this.setState({ [valueName]: event.target.value });
+    };
+  };
+
+  handleChangeDate = (field, date) => {
+    this.setState({ [field]: date });
+  };
+
   render() {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <h1>{this.state.from}</h1>
-          <h1>{this.state.to}</h1>
+          <label>To: </label>
           <input
             type="text"
             placeholder="From"
             name="from"
             value={this.state.from}
-            onChange={this.fromHandleChange.bind(this)}
+            onChange={this.handleChange("from")}
           />
           <div className="container">
             <div className="form-group">
-              <label>Select Date: </label>
+              <label>Select Start Date: </label>
               <DatePicker
-                todayButton={"Vandaag"}
+                placeholder="Select start date"
+                todayButton={"Today"}
+                name="startDate"
                 selected={this.state.startDate}
-                onChange={this.startDateHandleChange}
+                onChange={this.handleChangeDate.bind(this, "startDate")}
                 showTimeSelect
                 timeFormat="HH:mm"
                 timeIntervals={15}
@@ -67,20 +70,22 @@ class SearchBar extends React.Component {
               />
             </div>
           </div>
+          <label>From: </label>
           <input
             type="text"
             placeholder="To"
             name="to"
             value={this.state.to}
-            onChange={this.toHandleChange.bind(this)}
+            onChange={this.handleChange("to")}
           />
           <div className="container">
             <div className="form-group">
-              <label>Select Date: </label>
+              <label>Select End Date: </label>
               <DatePicker
+                placeholder="Select end date"
                 todayButton={"Vandaag"}
-                selected={this.state.EndDate}
-                onChange={this.endDateHandleChange}
+                selected={this.state.endDate}
+                onChange={this.handleChangeDate.bind(this, "endDate")}
                 showTimeSelect
                 timeFormat="HH:mm"
                 timeIntervals={15}
@@ -90,7 +95,7 @@ class SearchBar extends React.Component {
             </div>
           </div>
           <div className="form-group">
-            <button className="btn btn-success">Add Date</button>
+            <button className="btn btn-success">Go!</button>
           </div>
         </form>
       </div>
