@@ -12,9 +12,9 @@ class SearchBar extends React.Component {
     super(props);
 
     this.state = {
+      from: "",
       to: "",
       startDate: "",
-      from: "",
       endDate: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -47,7 +47,7 @@ class SearchBar extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <label>To: </label>
+          <label>From: </label>
           <input
             type="text"
             placeholder="From"
@@ -72,7 +72,7 @@ class SearchBar extends React.Component {
               />
             </div>
           </div>
-          <label>From: </label>
+          <label>To: </label>
           <input
             type="text"
             placeholder="To"
