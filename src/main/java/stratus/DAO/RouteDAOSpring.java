@@ -15,8 +15,7 @@ public class RouteDAOSpring implements RouteDAO {
     public List<String> findAll() {
         ArrayList<String> allRoutes = new ArrayList<>();
         for (Route r : routeRepository.findAll()) {
-            allRoutes.add(r.getStartLocation());}
-
+            allRoutes.add(r.getStartLocation() + r.getEndLocation());}
         return allRoutes;
     }
 
