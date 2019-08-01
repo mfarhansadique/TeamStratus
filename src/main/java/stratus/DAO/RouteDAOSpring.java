@@ -31,6 +31,7 @@ public class RouteDAOSpring implements RouteDAO {
     }
 
     public String getCurrencyById(int id){
-
+        Route r=routeRepository.findById(id).get();
+        return r.getCurrency();
     }
 }
