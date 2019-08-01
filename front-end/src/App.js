@@ -1,13 +1,15 @@
-import React from 'react';
-import './App.css';
-import Navbar from './Navbar.jsx';
-import RegistrationForm from './RegistrationForm.jsx';
+import React from "react";
+import "./App.css";
+import Navbar from "./Navbar.jsx";
+import RegistrationForm from "./RegistrationForm.jsx";
+import SearchBar from "./SearchBar.jsx";
 
 function App() {
   return (
     <div className="App">
-      <Navbar/>
-//      <RegistrationForm/>
+      {/* <Navbar /> */}
+      <SearchBar />
+      {/* <RegistrationForm /> */}
     </div>
   );
 }
