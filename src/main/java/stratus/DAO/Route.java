@@ -1,6 +1,7 @@
 package stratus.DAO;
 
 import javax.persistence.*;
+import java.sql.Clob;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class Route {
     private String routeDetails;//holds json data
     private String startLocation;
     private String endLocation;
-    private String date; //format: "yyyy-MM-dd 'at' HH:mm"
+    private Date date; //format: "yyyy-MM-dd 'at' HH:mm"
     private boolean favourite;
     private char transportMethod; // to do: translation method
     private String startLongitude;
@@ -35,18 +36,42 @@ public class Route {
     @JoinTable (name = "user_route" , joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "route_id")})
     private List<User> user = new ArrayList<User>();
 
+
+    public Route(String routeDetails, String startLocation, String endLocation, String startLongitude, String startLatitude, String endLongitude, String endLatitude,  List<User> user) {
+        this.routeDetails = routeDetails;
+        this.startLocation = startLocation;
+        this.endLocation = endLocation;
+        this.startLongitude = startLongitude;
+        this.startLatitude = startLatitude;
+        this.endLongitude = endLongitude;
+        this.endLatitude = endLatitude;
+        transportMethod = 'f';
+        this.user = user;
+    }
+
     public Route(String startLocation, String endLocation, String date, char transportMethod) {
+
+    }
+
+
+    //constructor for google maps
+    public Route(String routeDetails, String startLocation, String endLocation, Date date, char transportMethod, String startLongitude, String startLatitude, String endLongitude, String endLatitude, String currency, List<User>user) {
+        this.routeDetails = routeDetails;
+
         this.startLocation = startLocation;
         this.endLocation = endLocation;
         this.date = date;
         this.transportMethod = transportMethod;
-
-
-
+        this.startLongitude = startLongitude;
+        this.startLatitude = startLatitude;
+        this.endLongitude = endLongitude;
+        this.endLatitude = endLatitude;
+        this.currency = currency;
+        this.user = user;
     }
 
-    public Route(String routeDetails, String startLocation, String endLocation, String date, boolean favourite,
-                 char transportMethod, String startLongitude, String startLatitude,String endLongitude, String endLatitude,
+    public Route(String routeDetails, String startLocation, String endLocation, Date date, boolean favourite,
+                 char transportMethod, String startLongitude, String startLatitude, String endLongitude, String endLatitude,
                  String currency, String locationName, List<User> user) {
         this.routeDetails = routeDetails;
         this.startLocation = startLocation;
@@ -98,11 +123,11 @@ public class Route {
         this.endLocation = endLocation;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -125,7 +150,6 @@ public class Route {
     public List<User> getUser() {
         return user;
     }
-
 
     public void addUser(User user) {
         this.user.add(user);
