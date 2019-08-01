@@ -97,12 +97,15 @@ public class Maps {
         String startLongitude= Coord[1];
         String startLatitude=Coord[0];
 
-        String endLongitude= Coord[3];
-        String endLatitude= Coord[4];
+        String endLongitude= Coord[2];
+        String endLatitude= Coord[3];
         String currency= CurrencyAPI.currencyByCountry(getCountryCode(endLatitude,endLongitude));
-        String pJ =PrettyJSON.print(jsonString);
-        return(new Route(pJ,  startLocation, endLocation,  date,  false, transportMethod,  startLongitude,  startLatitude,  endLongitude,  endLatitude,  currency, null, null));
+        Date dateAPI= googleDateToDate(date);
+        String details=dataFromAPI(jsonString);
+        return(new Route(details,  startLocation, endLocation,  dateAPI,  false, transportMethod,  startLongitude,  startLatitude,  endLongitude,  endLatitude,  currency, null, null));
     }
+
+
 
 public static String stringToTime(String string){
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm");
@@ -112,6 +115,18 @@ public static String stringToTime(String string){
 
     catch(ParseException e){return "now";}
 
+}
+
+public static Date googleDateToDate(String date){
+        Date dateF= new Date();
+        if(date!="now"){
+            try {
+                dateF = new Date(Long.parseLong(date) * 1000);
+            }
+            catch(NumberFormatException e){}
+        }
+
+        return dateF;
 }
 
 public static String transToMode(char method){
@@ -153,7 +168,7 @@ public static String transToMode(char method){
 
 
 //For front end
-public static void dataFromAPI(String string){ //returns number of routes, distance and duration for each of them
+public static String dataFromAPI(String string){ //returns number of routes, distance and duration for each of them
     JSONObject myObjectData = new JSONObject(string);
     JSONArray routes = myObjectData.getJSONArray("routes");
     System.out.println("There are "+routes.length()+" route(s).");
@@ -163,8 +178,10 @@ public static void dataFromAPI(String string){ //returns number of routes, dista
         JSONObject trip=legs.getJSONObject(0);
         String duration= trip.getJSONObject("duration").getString("text");
         String distance= trip.getJSONObject("distance").getString("text");
-        System.out.println("duration:"+duration+"\tdistance:"+distance);
+        String a=duration+","+distance+","+Integer.toString(routes.length());
+        return a;
     }
+    return("");
 
 }
 
@@ -176,13 +193,12 @@ public static String[] getCoordinates(String string){ //method that can be added
     JSONObject trip=legs.getJSONObject(0);
     JSONObject endPlace=trip.getJSONObject("end_location");
     JSONObject startPlace=trip.getJSONObject("start_location");
-    StringJoiner latLong= new StringJoiner(" ");
 
-    String a= startPlace.getString("lat");
-    String b= startPlace.getString("lng");
+    String a= Double.toString(startPlace.getDouble("lat"));
+    String b= Double.toString(startPlace.getDouble("lng"));
 
-    String c= endPlace.getString("lat");
-    String d=endPlace.getString("lng");
+    String c= Double.toString(endPlace.getDouble("lat"));
+    String d=Double.toString(endPlace.getDouble("lng"));
 
     String[] result=new String[]{a,b,c,d};
 

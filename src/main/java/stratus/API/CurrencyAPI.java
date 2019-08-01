@@ -109,14 +109,14 @@ public class CurrencyAPI {
     public static void main(String[] args)  {
 
 
-        scn = new Scanner(System.in);
-        System.out.println("Please enter the Airport code of the currency you would like to view");
-        String toPass = scn.next();
+       // scn = new Scanner(System.in);
+       // System.out.println("Please enter the Airport code of the currency you would like to view");
+        //String toPass = scn.next();
 //        toPass = countryCurrencyMap.get(toPass);
 //        String string=getRate();
 //        printTheRate(string, toPass);
         //.getCurrencyByAirportCode(toPass);
-        getCurrencyByCity(toPass);
+       // getCurrencyByCity(toPass);
 
     }
 //"GBP": 0.895936,    "USD": 1.11557, "EUR": 1,

@@ -24,4 +24,9 @@ public class RouteDAOSpring implements RouteDAO {
         routeRepository.save(direction);
         return true;
     }
+
+    public Route findRouteById(){
+
+        return routeObject;
+    }
 }
