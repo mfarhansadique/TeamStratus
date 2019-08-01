@@ -40,9 +40,6 @@ public class Route {
         this.endLocation = endLocation;
         this.date = date;
         this.transportMethod = transportMethod;
-
-
-
     }
 
     public Route(String routeDetails, String startLocation, String endLocation, String date, boolean favourite,
@@ -125,7 +122,6 @@ public class Route {
     public List<User> getUser() {
         return user;
     }
-
 
     public void addUser(User user) {
         this.user.add(user);

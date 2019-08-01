@@ -1,58 +1,55 @@
 import React from 'react';
 
 class RegistrationForm extends React.Component {
-constructor(){
-super();
-this.state = {
-firstName: "",
-                                lastName: "",
-                                address: "",
-                                city: "",
-                                postCode: "",
-                                telephoneNumber: "",
-                                email: "",
-                                login: "",
-                                password: "",
-                                role: "U",
-                                route: null,
-                                photo: ""
-
-}
-this.handleSubmit = this.handleSubmit.bind(this);
-this.handleChange = this.handleChange.bind(this);
-this.handleResponse = this.handleResponse.bind(this);
-}
-
-        async handleSubmit(event){
-            event.preventDefault();
-            let json = JSON.stringify({
-                                firstName: this.state.firstName,
-                                lastName: this.state.lastName,
-                                address: this.state.address,
-                                city: this.state.city,
-                                postCode: this.state.postCode,
-                                telephoneNumber: this.state.telephoneNumber,
-                                email: this.state.email,
-                                login: this.state.login,
-                                password: this.state.password,
-                                role: "U",
-                                route: null,
-                                photo: ""
-                            });
-            let response = await fetch("http://localhost:8080/users/register", {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json"
-                     },
-                body: json
-
-        });
-            console.log(json);
-            let data = await response.json();
-            this.handleResponse(data);
-
+    constructor(){
+        super();
+        this.state = {
+        firstName: "",
+        lastName: "",
+        address: "",
+        city: "",
+        postCode: "",
+        telephoneNumber: "",
+        email: "",
+        login: "",
+        password: "",
+        role: "U",
+        route: null,
+        photo: ""
         }
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleResponse = this.handleResponse.bind(this);
+    }
+    async handleSubmit(event){
+        event.preventDefault();
+        let json = JSON.stringify({
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            address: this.state.address,
+            city: this.state.city,
+            postCode: this.state.postCode,
+            telephoneNumber: this.state.telephoneNumber,
+            email: this.state.email,
+            login: this.state.login,
+            password: this.state.password,
+            role: "U",
+            route: null,
+            photo: ""
+        });
+        let response = await fetch("http://localhost:8080/users/register", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: json
+            });
+
+        let data = await response.json();
+        this.handleResponse(data);
+    }
 
         handleChange = (valueName) => {
             return (event) => {
@@ -60,13 +57,13 @@ this.handleResponse = this.handleResponse.bind(this);
             };
         }
 
-        handleResponse = () => {
+    handleResponse = () => {
         console.log("it worked!!");
-        }
+    }
 
     render() {
-                 return(
 
+                 return(
                         <form onSubmit={this.handleSubmit} method="post">
                             <div class="container">
                                 <div class="row justify-content-center">
