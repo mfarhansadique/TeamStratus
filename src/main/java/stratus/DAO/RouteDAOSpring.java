@@ -25,8 +25,12 @@ public class RouteDAOSpring implements RouteDAO {
         return true;
     }
 
-    public Route findRouteById(){
+    public Route findRouteById(int id){
 
-        return routeObject;
+        return routeRepository.findById(id).get();
+    }
+
+    public String getCurrencyById(int id){
+
     }
 }
