@@ -29,11 +29,14 @@ public class UserController {
 
     }
 
-    @PostMapping("/users")
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/users/register")
     @ResponseStatus(HttpStatus.CREATED)
     User newUser(@RequestBody User newUser) {
+        System.out.println(newUser);
         newUser.encryptPassword(newUser.getPassword());
         userDAO.insertUser(newUser);
+
         return newUser;
     }
 

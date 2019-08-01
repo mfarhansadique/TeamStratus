@@ -150,7 +150,6 @@ public class Route {
         return user;
     }
 
-
     public void addUser(User user) {
         this.user.add(user);
     }
