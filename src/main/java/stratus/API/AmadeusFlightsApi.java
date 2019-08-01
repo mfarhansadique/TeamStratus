@@ -25,24 +25,40 @@ public class AmadeusFlightsApi {
         ArrayList<String> items = new ArrayList<>();
         JSONObject toReturn = new JSONObject();
         try {
+            ArrayList<String> toPass = new ArrayList<>();
             FlightOffer[] flightOffers = amadeus.shopping.flightOffers
                     .get(Params.with("origin", originAirport).and("destination", destinationAirport).and("departureDate", departureDate).and("max", "1"));
             JsonObject gson = flightOffers[0].getResponse().getResult();
+            //String getFlightPrice = fli
+            JsonObject flightName = gson.getAsJsonObject("dictionaries");
+            //System.out.println(flightName.toString());
+            JsonObject carrierName = flightName.getAsJsonObject("carriers");
+            //System.out.println(carrierName.toString());
+             String airlineName = carrierName.get("SV").getAsString();
+            //System.out.println(airlineName);
+            toPass.add(airlineName);
 
-            ArrayList<String> toPass = new ArrayList<>();
             for (int i = 0; i < flightOffers.length;i++){
                 FlightOffer.OfferItem[] itemsToGet = flightOffers[i].getOfferItems();
+
                 for (int j = 0; j < itemsToGet.length; j++) {
                     FlightOffer.OfferItem offerItem = itemsToGet[j];
-                    toPass.add(offerItem.getPrice().toString());
+                    toPass.add(Double.toString(offerItem.getPrice().getTotal()));
                     for (int k = 0; k < offerItem.getServices().length; k++) {
+                        ArrayList<String>durationToPass = new ArrayList<>();
+
                         for (int l = 0; l < offerItem.getServices()[k].getSegments().length ; l++) {
                             FlightOffer.Segment segment= offerItem.getServices()[k].getSegments()[l];
-                            toPass.add(segment.toString());
-                            System.out.println("LoL");
-                            System.out.println(segment.toString());
-                            //segment.getFlightSegment()
+                            durationToPass.add(segment.getFlightSegment().getDuration());
+                            if(l == 0){
+                                durationToPass.add(segment.getFlightSegment().getDeparture().getAt());
+                            }
+                            if (l == offerItem.getServices()[k].getSegments().length-1){
+                                durationToPass.add(segment.getFlightSegment().getArrival().getAt());
+                            }
                         }
+
+                        toPass.add(durationToPass.toString());
                     }
 
                 }
@@ -54,12 +70,12 @@ public class AmadeusFlightsApi {
 
 
             toReturn = new JSONObject(gson.toString());
-
+            System.out.println(toPass.toString());
             String longLatOrigin = AirportInformation.getLongLatofAirport(originAirport);
             String longLatDestination = AirportInformation.getLongLatofAirport(destinationAirport);
             String[] originInfo = longLatOrigin.split(",");
             String[] destinationInfo = longLatDestination.split(",");
-            items.add(toReturn.toString());
+            items.add(toPass.toString());
             items.addAll(Arrays.asList(originInfo));
             items.addAll(Arrays.asList(destinationInfo));
             String countryCode = Maps.getCountryCode(destinationInfo[0],destinationInfo[1]);

@@ -57,7 +57,6 @@ public class Route {
     //constructor for google maps
     public Route(String routeDetails, String startLocation, String endLocation, Date date, char transportMethod, String startLongitude, String startLatitude, String endLongitude, String endLatitude, String currency, List<User>user) {
         this.routeDetails = routeDetails;
-
         this.startLocation = startLocation;
         this.endLocation = endLocation;
         this.date = date;
