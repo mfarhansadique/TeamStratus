@@ -13,4 +13,6 @@ public class LoginPage {
         PageFactory.initElements(driver, this);
     }
 
+    @FindBy(how = How.ID, using = "id_name")
+    private WebElement username_txtbox ;
 }
