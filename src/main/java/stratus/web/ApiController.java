@@ -85,7 +85,7 @@ public String getRouteFromMaps(@PathVariable("start") String start, @PathVariabl
 
  @GetMapping("/getWeatherFuture/{id}/{time}")
  @ResponseBody
- public String[] getWeatherFuture(@PathVariable("id") int id,@PathVariable("time") String time){
+ public String getWeatherFuture(@PathVariable("id") int id,@PathVariable("time") String time){
   Route routeO=route.findRouteById(id);
   return WeatherAPI.outputWeatherFuture(routeO, time);
 

@@ -61,8 +61,10 @@ public class WeatherAPI {
 
 
 
-    private static String outputWeatherFuture(String lat, String lon, String time){
+    public static String outputWeatherFuture(Route route, String time){
 //time can be UNIX or [YYYY]-[MM]-[DD]T[HH]:[MM]:[SS][timezone]
+        String lat=route.getEndLatitude();
+        String lon=route.getEndLongitude();
         String string=PrettyJSON.print(apiCaller.getRapidApiResponse("https://dark-sky.p.rapidapi.com/"+ lat +","+ lon +","+time+"?lang=en&units=auto"));
         JSONObject myObjectData = new JSONObject(string);
         String summary=myObjectData.getJSONObject("currently").getString("icon");
