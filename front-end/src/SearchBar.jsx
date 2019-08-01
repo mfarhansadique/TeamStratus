@@ -4,6 +4,8 @@ import moment from "moment";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+// Also need to install moment byt running: npm install moment
+//
 
 class SearchBar extends React.Component {
   constructor(props) {
