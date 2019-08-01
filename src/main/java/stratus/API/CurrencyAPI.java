@@ -6,6 +6,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import stratus.DAO.Route;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -22,8 +23,15 @@ public class CurrencyAPI {
     private static HttpApiResponse apiCaller = new HttpApiResponse(apiKey, host);
     private static Map<String,String> countryCurrencyMap = getCountryCode();
 
+    public static void setCurrency(Route route){
+        if(route.getCurrency().equals("")){
+            route.setCurrency(currencyByCountry(Maps.getCountryCode(route.getEndLatitude(),route.getEndLongitude())));
+        }
 
-    private static String getRate()  {
+    }
+
+
+    public static String getRate()  {
 
 
         String endpoint = "latest";
@@ -55,7 +63,7 @@ public class CurrencyAPI {
         BufferedReader br = null;
         TreeMap<String,String> map = new TreeMap<String, String>();
         try {
-            br = new BufferedReader(new FileReader("/Users/nal33/IdeaProjects/TeamStratusCurrent/src/main/java/stratus/tableconvert_2019-07-25_154141.csv"));
+            br = new BufferedReader(new FileReader("src/main/resources/tableconvert_2019-07-26_154619.csv"));
             String line =  null;
             while((line=br.readLine())!=null){
                 String arr[] = line.split(",");
@@ -69,6 +77,9 @@ public class CurrencyAPI {
         return map;
     }
 
+    public static String currencyByCountry(String country){
+       return countryCurrencyMap.get(country);
+    }
     private static void getCurrencyByAirportCode(String airportCode){
         JSONObject toGet = new JSONObject(apiCaller.getRapidApiResponse("https://airport-info.p.rapidapi.com/airport?iata="+airportCode));
         String countryCode = toGet.getString("country_iso");
@@ -98,14 +109,14 @@ public class CurrencyAPI {
     public static void main(String[] args)  {
 
 
-        scn = new Scanner(System.in);
-        System.out.println("Please enter the Airport code of the currency you would like to view");
-        String toPass = scn.next();
+       // scn = new Scanner(System.in);
+       // System.out.println("Please enter the Airport code of the currency you would like to view");
+        //String toPass = scn.next();
 //        toPass = countryCurrencyMap.get(toPass);
 //        String string=getRate();
 //        printTheRate(string, toPass);
         //.getCurrencyByAirportCode(toPass);
-        getCurrencyByCity(toPass);
+       // getCurrencyByCity(toPass);
 
     }
 //"GBP": 0.895936,    "USD": 1.11557, "EUR": 1,
