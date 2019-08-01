@@ -20,12 +20,12 @@ public class WeatherAPI {
 
     //   TO GET THE WEATHER FOR TODAY OR THIS WEEK
 
-    private static String getWeatherByLatLon(String lat, String lon){
+    public static String getWeatherByLatLon(String lat, String lon){
         return apiCaller.getRapidApiResponse("https://dark-sky.p.rapidapi.com/"+ lat +","+ lon +"?lang=en&units=auto");
 
     }
 
-    private static String[] outputWeatherNow(Route route){
+    public static String[] outputWeatherNow(Route route){
         String string=getWeatherByLatLon(route.getEndLatitude(),route.getEndLongitude());
         JSONObject myObjectData = new JSONObject(string);
         Float temp= myObjectData.getJSONObject("currently").getFloat("temperature");
@@ -57,11 +57,11 @@ public class WeatherAPI {
         return result;
     }
 
-//    WEATHER FOR A PAST DATE
+//    WEATHER FOR A FURTHER DATE
 
 
 
-    private static String outputWeatherPast(String lat, String lon, String time){
+    private static String outputWeatherFuture(String lat, String lon, String time){
 //time can be UNIX or [YYYY]-[MM]-[DD]T[HH]:[MM]:[SS][timezone]
         String string=PrettyJSON.print(apiCaller.getRapidApiResponse("https://dark-sky.p.rapidapi.com/"+ lat +","+ lon +","+time+"?lang=en&units=auto"));
         JSONObject myObjectData = new JSONObject(string);

@@ -67,5 +67,28 @@ public String getRouteFromMaps(@PathVariable("start") String start, @PathVariabl
 
  }
 
+ @GetMapping("/getWeatherNow/{id}")
+ @ResponseBody
+ public String[] getWeatherNow(@PathVariable("id") int id){
+  Route routeO=route.findRouteById(id);
+  return WeatherAPI.outputWeatherNow(routeO);
+
+ }
+
+ @GetMapping("/getWeatherWeek/{id}/{dayDiff}")
+ @ResponseBody
+ public String[] getWeatherWeek(@PathVariable("id") int id,@PathVariable("dayDiff") int dayDiff){
+  Route routeO=route.findRouteById(id);
+  return WeatherAPI.outputWeatherWeek(routeO, dayDiff);
+
+ }
+
+ @GetMapping("/getWeatherFuture/{id}/{time}")
+ @ResponseBody
+ public String[] getWeatherFuture(@PathVariable("id") int id,@PathVariable("time") String time){
+  Route routeO=route.findRouteById(id);
+  return WeatherAPI.outputWeatherFuture(routeO, time);
+
+ }
 
 }
