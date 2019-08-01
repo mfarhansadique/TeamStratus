@@ -140,15 +140,20 @@ class RegistrationForm extends React.Component {
         onChange={this.handleChange("password")}
         required
       />,
-      <input type="text" name="photo" value="" />
+      <input
+        type="text"
+        name="photo"
+        onChange={this.handleChange("photo")}
+        value=""
+      />
     ];
     return (
       <form onSubmit={this.handleSubmit} method="post">
-        <div class="container">
+        <div className="container">
           {fields.map((field, count) => {
             let linkContent = tags[count];
             return (
-              <div className="row justify-content-center">
+              <div key={linkContent} className="row justify-content-center">
                 <div className="col-sm-4">{linkContent}</div>
                 <div className="col-sm-4">{field}</div>
               </div>
@@ -157,9 +162,9 @@ class RegistrationForm extends React.Component {
 
           <input type="hidden" name="role" value="U" />
           <input type="hidden" name="route" />
-          <div class="row justify-content-center">
-            <div class="col-sm-4">
-              <input class="btn btn-primary" type="submit" value="Submit" />
+          <div className="row justify-content-center">
+            <div className="col-sm-4">
+              <input className="btn btn-primary" type="submit" value="Submit" />
             </div>
           </div>
         </div>
