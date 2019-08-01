@@ -157,6 +157,25 @@ public class User {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         this.password = encoder.encode(password);
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", postCode='" + postCode + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", telephoneNumber='" + telephoneNumber + '\'' +
+                ", role='" + role + '\'' +
+                ", photo='" + photo + '\'' +
+                ", route=" + route +
+                '}';
+    }
 }
 
 

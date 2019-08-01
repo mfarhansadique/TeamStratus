@@ -13,7 +13,7 @@ public class RouteDAOSpring implements RouteDAO {
     private RouteRepository routeRepository;
 
     public List<String> findAll() {
-        ArrayList<String> allRoutes = new ArrayList<String>();
+        ArrayList<String> allRoutes = new ArrayList<>();
         for (Route r : routeRepository.findAll()) {
             allRoutes.add(r.getStartLocation() + r.getEndLocation());}
         return allRoutes;
@@ -22,6 +22,7 @@ public class RouteDAOSpring implements RouteDAO {
     public boolean save(Route direction) {
 //        routeRepository.findById(direction.getId());
         routeRepository.save(direction);
+
         return true;
     }
 }
