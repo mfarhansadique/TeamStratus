@@ -42,9 +42,12 @@ RouteDAO route;
   /*public Route(String routeDetails, String startLocation, String endLocation, String date, boolean favourite,
      char transportMethod, String startLongitude, String startLatitude, String endLongitude, String endLatitude,
              String currency, String locationName, List<User> user) {*/
-  //route.save(new Route(json,flights.get(3),flights.get(6),destinationdate,false,'f',flights.get(4),flights.get(5)));
-     System.out.println(route.findAll());
+  //Route routeToSave = new Route("The Flight",flights.get(3).toString(),flights.get(6).toString(),destinationdate,false,'f',flights.get(1).toString(),flights.get(2).toString(),flights.get(4).toString(),flights.get(5).toString(),flights.get(7).toString()," ",null);
+     //System.out.println(routeToSave.getEndLatitude());
+  //boolean toSave = route.save(routeToSave);
+     //System.out.println(toSave);
   //json =  json + "," + createWeatherJson ;
+     //System.out.println(route.findAll());
   return json;
  }
 

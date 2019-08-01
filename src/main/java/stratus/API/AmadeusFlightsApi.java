@@ -28,10 +28,31 @@ public class AmadeusFlightsApi {
             FlightOffer[] flightOffers = amadeus.shopping.flightOffers
                     .get(Params.with("origin", originAirport).and("destination", destinationAirport).and("departureDate", departureDate).and("max", "1"));
             JsonObject gson = flightOffers[0].getResponse().getResult();
-            for (int i = 0; i < flightOffers[0].getOfferItems().length; i++) {
-                //System.out.println(flightOffers[0].getOfferItems()[i].getServices()[i].getSegments()[i].getFlightSegment().getDeparture());
+
+            ArrayList<String> toPass = new ArrayList<>();
+            for (int i = 0; i < flightOffers.length;i++){
+                FlightOffer.OfferItem[] itemsToGet = flightOffers[i].getOfferItems();
+                for (int j = 0; j < itemsToGet.length; j++) {
+                    FlightOffer.OfferItem offerItem = itemsToGet[j];
+                    toPass.add(offerItem.getPrice().toString());
+                    for (int k = 0; k < offerItem.getServices().length; k++) {
+                        for (int l = 0; l < offerItem.getServices()[k].getSegments().length ; l++) {
+                            FlightOffer.Segment segment= offerItem.getServices()[k].getSegments()[l];
+                            toPass.add(segment.toString());
+                            System.out.println("LoL");
+                            System.out.println(segment.toString());
+                            //segment.getFlightSegment()
+                        }
+                    }
+
+                }
+
             }
-            //System.out.println(flightOffers[0].getOfferItems().toString());
+
+
+
+
+
             toReturn = new JSONObject(gson.toString());
 
             String longLatOrigin = AirportInformation.getLongLatofAirport(originAirport);
@@ -52,7 +73,7 @@ public class AmadeusFlightsApi {
 
         for (String toPr: items
              ) {
-            System.out.println(toPr);
+            //System.out.println(toPr);
         }
 
         return items;
