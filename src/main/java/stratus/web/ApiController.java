@@ -61,10 +61,10 @@ public String getRouteFromMaps(@PathVariable("start") String start, @PathVariabl
 
  @GetMapping("/getcurrency/{id}")
  @ResponseBody
- public void setCurrencyAPI(@PathVariable("id") int id){
+ public String setCurrencyAPI(@PathVariable("id") int id){
+  String a= route.updateCurrency(id);
+  return a;
 
-  //CurrencyAPI.setCurrencyy(route.getRouteById(id));
-  //return routeDAO.getCurrencyById(id);
  }
 
 

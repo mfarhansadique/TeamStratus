@@ -23,11 +23,11 @@ public class CurrencyAPI {
     private static HttpApiResponse apiCaller = new HttpApiResponse(apiKey, host);
     private static Map<String,String> countryCurrencyMap = getCountryCode();
 
-    public static void setCurrency(Route route){
+    public static String setCurrency(Route route){
         if(route.getCurrency().equals("")){
-            route.setCurrency(currencyByCountry(Maps.getCountryCode(route.getEndLatitude(),route.getEndLongitude())));
+            return currencyByCountry(Maps.getCountryCode(route.getEndLatitude(),route.getEndLongitude()));
         }
-
+        return route.getCurrency();
     }
 
 
